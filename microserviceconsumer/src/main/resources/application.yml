@@ -1,0 +1,22 @@
+server:
+  port: 8000
+spring:
+  application:
+    name: microservicecloud-consumer
+  cloud:
+    config:
+      enabled: false
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7000/eureka
+  instance:
+      instance-id: microservicecloud-consumer8000               #自定义服务名称信息
+      prefer-ip-address: true
+
+info:
+  app.name: microservicecloud-consumer
+  company.name: www.lc.com
+  build.artifactId: ${project.artifactId}
+  build.version: ${project.version}
+

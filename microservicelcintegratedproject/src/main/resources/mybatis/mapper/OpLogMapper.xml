@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="lc.dao.opLog.OpLogDao">
+
+    <insert id="saveOpLogToDB" parameterType="OpLogDto" >
+      INSERT INTO SYS_OPERATIONLOG (LOGID,SYSCODE,MODULECODE,MENUCODE,FUNCID,REGION,agencycode,agencyname,usercode,username,USERROLE,TRANSDATE,IPADDRESS,URL,STATUS,RECORDTIME,MESSAGE)
+      VALUE (#{logId},#{system},#{module},#{menu},#{function},#{region},#{agencycode},#{agencyname},#{usercode},#{username},#{role},#{transDate},#{ipAddress},#{url},#{status},#{recordTime},#{message})
+    </insert>
+
+
+
+
+</mapper>

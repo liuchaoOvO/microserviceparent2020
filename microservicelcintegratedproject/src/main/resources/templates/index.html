@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <!-- jquery -->
+
+</head>
+<body>
+<h1>hello spring boot with security</h1>
+<h2>===========主页============</h2>
+<div>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" class="btn btn-primary" value="注销用户"/>
+    </form>
+</div>
+<form name="form" th:action="@{/}" action="/" method="post">
+    主页页面的form位置。。。
+
+</form><br/>
+<div>
+    <a th:href="@{/user/getUserList(pageNum=1,pageSize=3)}">查看所有用户信息</a><br/>
+</div>
+<div>
+    <a th:href="@{/quartz/task/getTaskList(currentPage=1)}">查看所有自动任务</a><br/>
+</div>
+<br/>
+<div>
+    <form th:action="@{/secKill/doseckill}" action="/secKill/doseckill"   method="post">
+        秒杀的商品ID： <input type="text" id="goodsId"  name="goodsId" /><br/>
+        <input type="submit" class="btn btn-primary" value="秒杀操作"/>
+    </form>
+    <div th:if="${status}">
+        <ul class="nav navbar-nav" >
+            <li>秒杀状态：</a></li>
+           <!-- <li><a th:text="${secKillStatus}">状态值</a></li>-->
+            <span th:if="${status.code eq 0}">秒杀中</span>
+            <span th:if="${status.code eq 1}">秒杀失败</span>
+            <span th:if="${status.code ne 0 and status.code ne 1 }">秒杀成功</span>
+        </ul>
+    </div>
+    <div>
+        <a th:href="@{/secKill/result(goodsId=${goodsId})}">查看秒杀结果</a><br/>
+    </div>
+</div>
+<div>
+    <a th:href="@{/dbUpdate}">执行数据库脚本</a><br/>
+</div>
+<div>
+    <a th:href="@{/mq/mqUI}">发送MQ</a><br/>
+</div>
+</body>
+</html>

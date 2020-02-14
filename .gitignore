@@ -1,0 +1,12 @@
+# Project exclude paths
+/microserviceconfigclient/target/
+/microserviceconfigserver/target/
+/microserviceconsumer/target/
+/microserviceconsumerfeignhystrix/target/
+/microserviceconsumerhystrixdashbord/target/
+/microserviceeurake/target/
+/microserviceprovider/target/
+/microserviceprovider2/target/
+/microserviceprovider3/target/
+/microserviceproviderhystrix/target/
+/microservicezuul/target/

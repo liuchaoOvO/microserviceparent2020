@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8">
+    <title>404自定义错误页面</title>
+</head>
+<body>
+-----------自定义404错误页面-----------
+<div th:if="${result}">
+    <h2 th:text="${result.errorCode}"/><br/>
+    <h2 th:text="${result.msg}"/>
+</div>
+
+
+</body>
+</html>

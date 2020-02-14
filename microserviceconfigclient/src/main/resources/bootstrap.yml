@@ -1,0 +1,19 @@
+server:
+  port: 13000
+spring:
+  application:
+    name: config-client
+  cloud:
+    config:
+      profile: dev # 对应 {profile} 部分
+      label: master # 对应 {label} 部分，即 Git 的分支。如果配置中心使用的是本地存储，则该参数无用
+      uri: http://localhost:9000   #Config server的uri
+      discovery:
+        enabled: true
+        service-id: MICROSERVICE-CONFIG-SERVER
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7000/eureka/
+

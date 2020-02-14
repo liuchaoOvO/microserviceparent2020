@@ -1,0 +1,9 @@
+server:
+   port: 9000          #  http://localhost:9000/hystrix
+management:
+  endpoints:
+    web:
+      exposure:
+       include: "*"  # * 在yaml 文件属于关键字，所以需要加引号
+
+

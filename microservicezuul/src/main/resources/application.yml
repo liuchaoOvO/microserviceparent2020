@@ -1,0 +1,28 @@
+server:
+  port: 12345
+
+spring:
+  application:
+    name: microservice-zuul
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7000/eureka
+  instance:
+    instance-id: microservice-zuul12345     #自定义服务名称信息
+    prefer-ip-address: true                        #访问路径可以显示IP地址
+zuul:
+  prefix: /MySubSystemNameProvider
+  ignored-services: microservicecloud-provider
+  routes:
+    mydept.serviceId: microservicecloud-provider
+    mydept.path: /provider/**
+    lc.serviceId: microservicecloud-lcintegratedproject
+    lc.path: /lc/**
+# http://lczuul.com:12345/MySubSystemNameProvider/provider/get/8
+# lczuul.com 是在本地hosts 文件配的 127.0.0.1   域名映射
+info:
+  app.name: microservice-zuul
+  company.name: www.lc.com
+  build.artifactId: ${project.artifactId}
+  build.version: ${project.version}

@@ -1,0 +1,26 @@
+server:
+  port: 8001
+feign:
+  hystrix:
+    enabled: true
+spring:
+  application:
+    name: microservicecloud-consumer
+  cloud:
+    config:
+      enabled: false
+eureka:
+  client:
+    register-with-eureka: false
+    service-url:
+      defaultZone: http://localhost:7000/eureka
+  instance:
+      instance-id: microservicecloud-consumerHystrix8001               #自定义服务名称信息
+      prefer-ip-address: true
+
+info:
+  app.name: microservicecloud-consumerHystrix
+  company.name: www.lc.com
+  build.artifactId: ${project.artifactId}
+  build.version: ${project.version}
+
