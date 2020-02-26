@@ -107,7 +107,7 @@ public class QuartzServiceImpl implements QuartzService, InitializingBean {
         jobListener.setName(JobListenerName);
         jobListener.setGroupName("JobListenerGroup");
         //添加TriggerListener监听器
-        AutoJobTriggerListener triggerListener=new AutoJobTriggerListener();
+        AutoJobTriggerListener triggerListener = new AutoJobTriggerListener();
         try {
             scheduler.getListenerManager().addJobListener(jobListener);
             scheduler.getListenerManager().addTriggerListener(triggerListener);
@@ -140,6 +140,7 @@ public class QuartzServiceImpl implements QuartzService, InitializingBean {
 
     /**
      * 初始化加载定时任务
+     *
      * @throws Exception
      */
     @Override
@@ -155,7 +156,7 @@ public class QuartzServiceImpl implements QuartzService, InitializingBean {
         jobListener.setName(JobListenerName);
         jobListener.setGroupName("JobListenerGroup");
         //添加TriggerListener监听器
-        AutoJobTriggerListener triggerListener=new AutoJobTriggerListener();
+        AutoJobTriggerListener triggerListener = new AutoJobTriggerListener();
         try {
             scheduler.getListenerManager().addJobListener(jobListener);
             scheduler.getListenerManager().addTriggerListener(triggerListener);
@@ -263,8 +264,6 @@ public class QuartzServiceImpl implements QuartzService, InitializingBean {
     }
 
 
-
-
     @Override
     public List<QuartzTaskRecordsVo> taskRecords(String taskNo) {
         List<QuartzTaskRecords> quartzTaskRecords = quartzTaskRecordsService.listTaskRecordsByTaskNo(taskNo);
@@ -348,9 +347,8 @@ public class QuartzServiceImpl implements QuartzService, InitializingBean {
     }
 
     @Override
-    public Integer getTaskCountNum()
-    {
-        return  quartzTaskInformationsService.getTaskCountNum();
+    public Integer getTaskCountNum() {
+        return quartzTaskInformationsService.getTaskCountNum();
 
     }
 

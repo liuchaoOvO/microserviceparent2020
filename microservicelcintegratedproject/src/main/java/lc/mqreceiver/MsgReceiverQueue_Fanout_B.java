@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 @RabbitListener (queues = RabbitConfig.QUEUE_Fanout_B, containerFactory = "rabbitListenerContainerFactory")
 public class MsgReceiverQueue_Fanout_B {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
     @RabbitHandler
     public void processHandler(@Payload FanoutObj obj) {
         logger.info("QUEUE_Fanout_B--用户信息：" + obj.toString());

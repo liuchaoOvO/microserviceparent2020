@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>MQ页面</title>
+    <!-- jquery -->
+    <script type="text/javascript" th:src="@{/js/addtask.js}"></script>
+    <script src="/js/jquery/jquery-1.12.3.min.js"></script>
+</head>
+<body>
+</div>
+<h1>验证DirectExchange 模式</h1>
+<form name="form" th:action="@{/mq/mqSendUserObj}" action="/mq/mqSendMsg" method="post">
+    账号： <input type="text" id="username" name="username"  placeholder="请输入账号" /><br/>
+    密码： <input type="password" id="password" name="password" placeholder="请输入密码" /><br/>
+    <input type="submit"   value="发送/mq/mqSendMsg post请求" />
+</form><br/>
+<h1>验证FanoutExchange 模式</h1>
+<form name="form" th:action="@{/mq/mqSendFanoutObj}"  method="post">
+    fanoutObj_id： <input type="text" id="fanoutObj_id" name="fanoutObj_id"  placeholder="请输入fanoutObj_id" /><br/>
+    fanoutObj_name： <input type="password" id="fanoutObj_name" name="fanoutObj_name" placeholder="请输入fanoutObj_name" /><br/>
+    fanoutObj_code： <input type="password" id="fanoutObj_code" name="fanoutObj_code" placeholder="请输入fanoutObj_code" /><br/>
+    <input type="submit"   value="发送/mq/mqSendFanoutObj post请求" />
+</form><br/>
+<h1>验证TopicExchange 模式</h1>
+<form name="form" th:action="@{/mq/mqSendTopicObj}"  method="post">
+    fanoutObj_id： <input type="text" id="topicObj_id" name="topicObj_id"  placeholder="请输入topicObj_id" /><br/>
+    fanoutObj_name： <input type="password" id="topicObj_name" name="topicObj_name" placeholder="请输入topicObj_name" /><br/>
+    fanoutObj_code： <input type="password" id="topicObj_code" name="topicObj_code" placeholder="请输入topicObj_code" /><br/>
+    <input type="submit"   value="发送/mq/mqSendTopicObj post请求" />
+</form><br/>
+</div>
+</body>
+</html>

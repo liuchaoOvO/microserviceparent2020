@@ -1,8 +1,10 @@
 package lc.entity;
 
 import lc.util.UUIDUtil;
-import lombok.*;
-
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -14,10 +16,7 @@ import java.math.BigDecimal;
 @Getter
 @ToString
 @EqualsAndHashCode
-public class SecOrder implements Serializable
-{
-
-
+public class SecOrder implements Serializable {
     private static final long serialVersionUID = 1724254862421035876L;
 
     private String id;
@@ -30,7 +29,7 @@ public class SecOrder implements Serializable
     public SecOrder(String productId) {
         String utilId = UUIDUtil.getUniqueKey();
         this.id = utilId;
-        this.userId = "userId"+utilId;
+        this.userId = "userId" + utilId;
         this.productId = productId;
     }
 

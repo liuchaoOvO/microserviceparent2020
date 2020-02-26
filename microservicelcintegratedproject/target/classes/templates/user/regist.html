@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>注册</title>
+ <!--   <script type="text/javascript" th:src="@{/resources/static/js/regist.js}"></script>-->
+</head>
+<body>
+
+<h2>注册用户页面</h2>
+<form name="form" th:action="@{/user/regist}" action="/user/regist" method="post">
+    账号： <input type="text" id="username" name="username"  placeholder="请输入账号" /><br/>
+    密码： <input type="password" id="password" name="password" placeholder="请输入密码" /><br/>
+    <input type="submit"  id="regist" value="注册按钮" />
+</form><br/>
+</body>
+</html>

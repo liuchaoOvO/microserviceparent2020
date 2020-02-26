@@ -8,13 +8,12 @@ import java.util.List;
 /**
  * @author liuchaoOvO on 2019/4/16
  */
-public interface UserService
-{
-     boolean addUser (SysUser user);
+public interface UserService {
+    boolean addUser(SysUser user);
 
-     SysUser getUser(String id);
+    SysUser getUser(String id);
 
-     List<SysUser> getUsers();
+    List<SysUser> getUsers();
 
-     Page<SysUser> getUserList(Integer pageNum, Integer pageSize);
+    Page<SysUser> getUserList(Integer pageNum, Integer pageSize);
 }

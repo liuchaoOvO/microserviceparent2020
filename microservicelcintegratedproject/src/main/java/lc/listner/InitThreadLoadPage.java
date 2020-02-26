@@ -1,13 +1,13 @@
-/*
-package lc.config;
+package lc.listner;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-*/
+
 /**
  * @author liuchaoOvO on 2019/4/22
+ * @description 项目启动后打开1个页面
  *//*
 
 @Component

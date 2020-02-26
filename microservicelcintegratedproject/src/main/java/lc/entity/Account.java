@@ -12,7 +12,6 @@ import lombok.ToString;
 @Getter
 @ToString
 @EqualsAndHashCode
-public class Account
-{
+public class Account {
     private String account_Type;
 }

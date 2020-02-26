@@ -14,8 +14,8 @@ import java.util.Date;
 @Getter
 @ToString
 @EqualsAndHashCode
-public class SeckillGoods
-{   private Long id;
+public class SeckillGoods {
+    private Long id;
     private Long goodsId;
     private Integer stockCount;
     private Date startDate;

@@ -1,8 +1,6 @@
 package lc.config;
 
 import com.alibaba.druid.util.StringUtils;
-import lc.controller.MultiResolverType.MultiResolverTypeContrller;
-import lc.entity.SysUser;
 import lc.service.security.MySysUserService;
 import lc.util.CustomParamBinding;
 import org.slf4j.Logger;
@@ -21,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author liuchaoOvO on 2019/4/16
+ * @description 方法参数解析器
  */
 @Service
 public class SysUserArgumentResolver implements HandlerMethodArgumentResolver {
@@ -32,6 +31,7 @@ public class SysUserArgumentResolver implements HandlerMethodArgumentResolver {
 
     /**
      * 当参数类型为  包含自定义注解CustomParamBinding 才做处理
+     *
      * @param methodParameter
      * @return
      */
@@ -45,7 +45,9 @@ public class SysUserArgumentResolver implements HandlerMethodArgumentResolver {
     }
 
     /**
-     * 思路：先获取到已有参数HttpServletRequest，从中获取到token，再用token作为key从redis拿到User，而HttpServletResponse作用是为了延迟有效期
+     * 思路：
+     * 1、先获取到已有参数HttpServletRequest，从中获取到token。
+     * 2、再用token作为key从redis拿到User，而HttpServletResponse作用是为了延迟有效期
      */
     @Override
     public Object resolveArgument(MethodParameter methodParameter, ModelAndViewContainer modelAndViewContainer, NativeWebRequest nativeWebRequest, WebDataBinderFactory webDataBinderFactory) throws Exception {

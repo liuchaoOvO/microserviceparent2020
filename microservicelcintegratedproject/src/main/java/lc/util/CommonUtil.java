@@ -2,27 +2,24 @@ package lc.util;
 
 import lc.entity.SysUser;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.List;
 import java.util.Map;
 
 /**
  * @ClassName CommonUtil
  * @Description 通用工具类
- * @Author simonsfan
+ * @Author liuchaoOvO
  * @Date 2019/1/8
  * Version  1.0
  */
 public class CommonUtil {
 
-    public  static volatile ThreadLocal<Map<String, SysUser>> threadLocal=new ThreadLocal();
+    public static volatile ThreadLocal<Map<String, SysUser>> threadLocal = new ThreadLocal();
     @Autowired
     RedisUtil redisUtil;
+
     /**
      * 获取具体的异常信息
      *
@@ -39,8 +36,6 @@ public class CommonUtil {
             pw.close();
         }
     }
-
-
 
 
 }

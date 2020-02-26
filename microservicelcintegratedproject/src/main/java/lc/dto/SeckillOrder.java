@@ -12,9 +12,9 @@ import lombok.ToString;
 @Getter
 @ToString
 @EqualsAndHashCode
-public class SeckillOrder
-{   private Long id;
+public class SeckillOrder {
+    private Long id;
     private String userId;
-    private Long  orderId;
+    private Long orderId;
     private Long goodsId;
 }

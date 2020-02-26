@@ -8,13 +8,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * @author: CoderTnT
+ * @author: liuchaoOvO
  * @date: 2018/8/31
  * 自定了权限不足的返回值
  */
 @Component
-public class RestAccessDeniedHandler implements AccessDeniedHandler
-{
+public class RestAccessDeniedHandler implements AccessDeniedHandler {
 
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException e) {

@@ -13,12 +13,12 @@ import java.util.List;
 @Mapper
 public interface UserDao {
 
-     void addUser (SysUser user);
+    void addUser(SysUser user);
 
-     SysUser getUser(int id);
+    SysUser getUser(int id);
 
-     List<SysUser> getUsers();
+    List<SysUser> getUsers();
 
-     @Select("SELECT * FROM sys_user ")
-     Page<SysUser> getUserList(Integer pageNum, Integer pageSize);
+    @Select ("SELECT * FROM sys_user ")
+    Page<SysUser> getUserList(Integer pageNum, Integer pageSize);
 }

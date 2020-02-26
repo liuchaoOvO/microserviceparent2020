@@ -1,7 +1,6 @@
 package lc.service.impl;
 
 
-
 import lc.dao.quartz.QuartzTaskInformationsMapper;
 import lc.entity.QuartzTaskInformations;
 import lc.service.quartz.QuartzTaskInformationsService;
@@ -22,8 +21,7 @@ import java.util.Map;
  * Version  1.0
  */
 @Service
-public class QuartzTaskInformationsServiceImpl implements QuartzTaskInformationsService
-{
+public class QuartzTaskInformationsServiceImpl implements QuartzTaskInformationsService {
 
     @Autowired
     private QuartzTaskInformationsMapper quartzTaskInformationsMapper;
@@ -103,8 +101,7 @@ public class QuartzTaskInformationsServiceImpl implements QuartzTaskInformations
     }
 
     @Override
-    public Integer getTaskCountNum()
-    {
+    public Integer getTaskCountNum() {
         return quartzTaskInformationsMapper.getTaskCountNum();
     }
 

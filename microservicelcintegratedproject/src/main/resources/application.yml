@@ -2,46 +2,36 @@ server:
   port: 12580
 
 mybatis:
-  config-location: "classpath:mybatis/mybatis.cfg.xml"        # mybatis配置文件所在路径
+  config-location: "classpath:mybatis/mybatis.cfg.xml"         # mybatis配置文件所在路径
   mapper-locations:
     - "classpath*:mybatis/mapper/**/*.xml"                     # mapper映射文件
-  type-aliases-package: lc.entity            # 别名类所在包
+  type-aliases-package: lc.entity                              # 别名类所在包
 
 spring:
   application:
-    name: microservicecloud-lcintegratedproject                        #微服务的名字
-  ###################以下为druid增加的配置###########################
+    name: microservicecloud-lcintegratedproject                #微服务的名字
+  ###################以下为druid增加的配置#####################
   datasource:
-    driverClassName: com.mysql.jdbc.Driver                # mysql驱动包
-    type: com.alibaba.druid.pool.DruidDataSource              # 当前数据源操作类型
+    driverClassName: com.mysql.jdbc.Driver                      # mysql驱动包
+    type: com.alibaba.druid.pool.DruidDataSource                # 当前数据源操作类型
     url: jdbc:mysql://localhost:3306/springboot?characterEncoding=utf-8&useSSL=false
-    username: test
+    username: test                                              # mysql 本地环境 用户：root 密码 Liu123456
     password: 1
-
-
-    # 初始化大小，最小，最大
     initialSize: 5
     minIdle: 5
     maxActive: 20
-    # 配置获取连接等待超时的时间
     maxWait: 60000
-    # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
-    timeBetweenEvictionRunsMillis: 60000
-    # 配置一个连接在池中最小生存的时间，单位是毫秒
-    minEvictableIdleTimeMillis: 300000
+    timeBetweenEvictionRunsMillis: 60000                        # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+    minEvictableIdleTimeMillis: 300000                          # 配置一个连接在池中最小生存的时间，单位是毫秒
     testWhileIdle: true
     testOnBorrow: false
     testOnReturn: false
-    # 打开PSCache，并且指定每个连接上PSCache的大小
-    poolPreparedStatements: true
+    poolPreparedStatements: true                                 # 打开PSCache，并且指定每个连接上PSCache的大小
     maxPoolPreparedStatementPerConnectionSize: 20
-    # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
-    filters: stat,wall,log4j
-    # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
-    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
-    # 合并多个DruidDataSource的监控数据
-    useGlobalDataSourceStat: true
-    ###############以上为配置druid添加的配置########################################                                             # 数据库连接池的最小维持连接数
+    filters: stat,wall,log4j                                     # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000   # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+    useGlobalDataSourceStat: true                                 # 合并多个DruidDataSource的监控数据
+    ###############以上为配置druid添加的配置#######################                                             # 数据库连接池的最小维持连接数
   thymeleaf:
     prefix: classpath:/templates/
     suffix: .html
@@ -59,13 +49,12 @@ tx-lcn:
   client:
     manager-address: 127.0.0.1:8070
 
-
 rabbitmq:
-    host: 127.0.0.1
-    port: 5672
-    username: guest
-    password: guest
-    publisher-confirms: true    #  消息发送到交换机确认机制,是否确认回
+  host: 127.0.0.1
+  port: 5672
+  username: guest
+  password: guest
+  publisher-confirms: true                                         #  消息发送到交换机确认机制,是否确认回
 
 eureka:
   client:
@@ -73,7 +62,7 @@ eureka:
       defaultZone: http://localhost:7000/eureka
   instance:
     instance-id: microservicecloud-provider-lcintegratedproject     #自定义服务名称信息
-    prefer-ip-address: true                        #访问路径可以显示IP地址
+    prefer-ip-address: true                                         #访问路径可以显示IP地址
 info:
   app.name: microservicecloud-lcintegratedproject
   company.name: www.lc.com

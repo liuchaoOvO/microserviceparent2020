@@ -1,7 +1,6 @@
 package lc.service.impl;
 
 
-
 import lc.dao.quartz.QuartzTaskRecordsMapper;
 import lc.entity.QuartzTaskRecords;
 import lc.service.quartz.QuartzTaskRecordsService;
@@ -18,8 +17,7 @@ import java.util.List;
  * Version  1.0
  */
 @Service
-public class QuartzTaskRecordsServiceImpl implements QuartzTaskRecordsService
-{
+public class QuartzTaskRecordsServiceImpl implements QuartzTaskRecordsService {
 
     @Autowired
     private QuartzTaskRecordsMapper quartzTaskRecordsMapper;

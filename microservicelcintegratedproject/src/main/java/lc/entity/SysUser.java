@@ -19,32 +19,31 @@ import java.util.Date;
 @Getter
 @ToString
 @EqualsAndHashCode
-public class SysUser implements Serializable
-{
+public class SysUser implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private String id;
     private String username;
     private String password;
     private int status;
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat (pattern = "yyyy-MM-dd HH:mm:ss")
     private Date last_ver;
 
-    public SysUser(){
+    public SysUser() {
 
     }
-    public SysUser(String id, String username, String password)
-    {
-        this.id=id;
-        this.username=username;
-        this.password=password;
+
+    public SysUser(String id, String username, String password) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
     }
-    public SysUser(String id, String username, String password, int status, Date last_ver)
-    {
-        this.id=id;
-        this.username=username;
-        this.password=password;
-        this.status=status;
-        this.last_ver=last_ver;
+
+    public SysUser(String id, String username, String password, int status, Date last_ver) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.status = status;
+        this.last_ver = last_ver;
     }
 }

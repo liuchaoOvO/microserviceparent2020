@@ -15,8 +15,7 @@ import org.springframework.stereotype.Service;
  * Version  1.0
  */
 @Service
-public class QuartzTaskErrorsServiceImpl implements QuartzTaskErrorsService
-{
+public class QuartzTaskErrorsServiceImpl implements QuartzTaskErrorsService {
 
     @Autowired
     private QuartzTaskErrorsMapper quartzTaskErrorsMapper;

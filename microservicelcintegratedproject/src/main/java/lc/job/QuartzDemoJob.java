@@ -1,6 +1,5 @@
-package lc.factory;
+package lc.job;
 
-import lc.controller.MultiResolverType.MultiResolverTypeContrller;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
