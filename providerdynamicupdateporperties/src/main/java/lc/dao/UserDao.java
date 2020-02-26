@@ -4,6 +4,7 @@ package lc.dao;
  * @author liuchaoOvO on 2019/3/15
  */
 
+import lc.entity.SysUser;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

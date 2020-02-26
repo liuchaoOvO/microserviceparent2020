@@ -4,6 +4,8 @@ package lc.service;
  * @author liuchaoOvO on 2019/3/15
  */
 
+import lc.entity.SysUser;
+
 import java.util.List;
 
 public interface UserService {

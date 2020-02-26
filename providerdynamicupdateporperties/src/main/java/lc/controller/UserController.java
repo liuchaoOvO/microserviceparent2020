@@ -4,6 +4,7 @@ package lc.controller;
  * @author liuchaoOvO on 2019/3/15
  */
 
+import lc.entity.SysUser;
 import lc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

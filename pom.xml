@@ -35,7 +35,6 @@
         <module>microservicezuul</module>
         <module>microserviceconfigserver</module>
         <module>providerdynamicupdateporperties</module>
-        <module>testJavaTechnology</module>
         <module>microservicelcintegratedproject</module>
         <module>microserviceconfigclient</module>
         <module>microservicetxlcnmanager</module>
