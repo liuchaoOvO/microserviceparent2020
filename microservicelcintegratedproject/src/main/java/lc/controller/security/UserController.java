@@ -63,15 +63,15 @@ public class UserController {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setStatus(1);
         //判断注册的用户是否存在 若存在则返回到注册页面
-        SysUser judgeUser = mySysUserService.findUserByUsername(user.getUsername());
-        if (judgeUser != null) {
+        SysUser isExistUser = mySysUserService.findUserByUsername(user.getUsername());
+        if (isExistUser != null) {
             return "/user/regist";
         }
         //uuid 设置主键
         user.setId(UUIDUtil.uuid());
-        boolean a = mySysUserService.registUser(user);
+        boolean registUserSuccess = mySysUserService.registUser(user);
 
-        if (a) {
+        if (registUserSuccess) {
             return "/user/login";
         } else return "/user/regist";
     }
