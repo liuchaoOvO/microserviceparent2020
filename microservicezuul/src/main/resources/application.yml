@@ -9,7 +9,7 @@ eureka:
     service-url:
       defaultZone: http://localhost:7000/eureka
   instance:
-    instance-id: microservice-zuul12345     #自定义服务名称信息
+    instance-id: microservice-zuul12345            #自定义服务名称信息
     prefer-ip-address: true                        #访问路径可以显示IP地址
 zuul:
   prefix: /MySubSystemNameProvider
