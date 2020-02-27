@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * @author liuchaoOvO on 2018/12/28
+ *
  */
 @Component
 @RabbitListener (queues = RabbitConfig.QUEUE_SecKillQueue, containerFactory = "rabbitListenerContainerFactory")
@@ -29,7 +30,7 @@ public class MsgReceiverSecKillQueue {
     @RabbitHandler
     public void processSecKill(@Payload SeckillMessage obj) {
         try {
-            logger.info("receive message:" + obj.toString());
+            logger.debug("receive message:{}", obj.toString());
             lc.entity.SysUser user = obj.getUser();
             long goodsId = obj.getGoodsId();
             GoodsVo goodsVo = secKillService.getGoodsVoByGoodsId(goodsId);
@@ -45,9 +46,9 @@ public class MsgReceiverSecKillQueue {
             try {
                 //减库存 下订单 写入秒杀订单
                 OrderInfo orderInfo = secKillService.seckill(user, goodsVo);
-                logger.info("orderInfo:" + orderInfo.toString());
+                logger.debug("orderInfo:{}", orderInfo.toString());
             } catch (Exception e) {
-                logger.info(e.getMessage());
+                logger.debug(e.getMessage());
             }
         } catch (Exception e) {
             logger.debug(e.getMessage());

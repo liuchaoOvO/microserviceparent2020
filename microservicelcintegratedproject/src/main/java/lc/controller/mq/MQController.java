@@ -32,7 +32,7 @@ public class MQController {
     //验证直接模式
     @RequestMapping (value = "/mqSendUserObj", method = RequestMethod.POST)
     @ResponseBody
-    public void mqSendUserObj(SysUser sysUser) {
+    public String mqSendUserObj(SysUser sysUser) {
         //uuid 设置主键
         sysUser.setId(UUIDUtil.uuid());
         sysUser.setStatus(1);
@@ -40,48 +40,73 @@ public class MQController {
         sysUser.setPassword(bCryptPasswordEncoder.encode(sysUser.getPassword()));
         String correlationId = msgProducer.mqSendUserObj(sysUser);
         if (correlationId != "") {
-            logger.info("发送到mq的请求成功：" + correlationId + "/mqSendMsg");
+            logger.debug("发送到mq的请求成功：" + correlationId + "/mqSendMsg");
+            return "mqSendUserObj发送到mq的请求成功：" + correlationId + "/mqSendMsg";
         } else {
-            logger.info("发送到mq的请求失败");
+            logger.debug("发送到mq的请求失败");
+            return "mqSendUserObj发送到mq的请求失败...";
         }
     }
 
     //验证广播模式
     @RequestMapping (value = "/mqSendFanoutObj", method = RequestMethod.POST)
     @ResponseBody
-    public void mqSendFanoutObj(FanoutObj object)  {
+    public String mqSendFanoutObj(FanoutObj object) {
         String correlationId = msgProducer.mqSendFanoutObj(object);
         if (correlationId != "") {
-            logger.info("发送到mq的请求成功：" + correlationId + "/mqSendFanoutObj");
+            logger.debug("发送到mq的请求成功：" + correlationId + "/mqSendFanoutObj");
+            return "mqSendFanoutObj发送到mq的请求成功：" + correlationId + "/mqSendFanoutObj";
         } else {
-            logger.info("发送到mq的请求失败");
+            logger.debug("发送到mq的请求失败");
+            return "mqSendFanoutObj发送到mq的请求失败...";
+
         }
     }
 
-    //验证话题模式
-    @RequestMapping (value = "/mqSendTopicObj", method = RequestMethod.POST)
+    //验证话题模式 mqSendTopicAll
+    @RequestMapping (value = "/mqSendTopicAll", method = RequestMethod.POST)
     @ResponseBody
-    public void mqSendTopicObj(TopicObj object) {
-        String correlationId = msgProducer.mqSendTopicObj(object);
+    public String mqSendTopicAll(TopicObj object) {
+        String correlationId = msgProducer.mqSendTopicAll(object);
         if (correlationId != "") {
-            logger.info("发送到mq的请求成功：" + correlationId + "/mqSendTopicObj");
+            logger.debug("发送到mq的请求成功：" + correlationId + "/mqSendTopicAll");
+            return "mqSendTopicAll发送到mq的请求成功：" + correlationId + "/mqSendTopicAll";
+
         } else {
-            logger.info("发送到mq的请求失败");
+            logger.debug("发送到mq的请求失败");
+            return "mqSendTopicAll发送到mq的请求失败...";
+        }
+    }
+
+    //验证话题模式 mqSendTopicOne
+    @RequestMapping (value = "/mqSendTopicOne", method = RequestMethod.POST)
+    @ResponseBody
+    public String mqSendTopicOne(TopicObj object) {
+        String correlationId = msgProducer.mqSendTopicOne(object);
+        if (correlationId != "") {
+            logger.debug("发送到mq的请求成功：" + correlationId + "/mqSendTopicOne");
+            return "mqSendTopicOne发送到mq的请求成功：" + correlationId + "/mqSendTopicOne";
+
+        } else {
+            logger.debug("发送到mq的请求失败");
+            return "mqSendTopicOne发送到mq的请求失败...";
         }
     }
 
     @RequestMapping (value = "/mqSendTopMsg", method = RequestMethod.POST)
-    public void mqSendTopMsg(String msg)  {
+    public String mqSendTopMsg(String msg) {
         String correlationId = msgProducer.sendTopicMsg(msg);
         if (correlationId != "") {
-            System.out.println("发送到mq的请求成功：" + correlationId + "/mqSendTopMsg");
+            logger.debug("发送到mq的请求成功：" + correlationId + "/mqSendTopMsg");
+            return "mqSendTopMsg发送到mq的请求成功：" + correlationId + "/mqSendTopMsg";
         } else {
-            System.out.println("发送到mq的请求失败");
+            logger.debug("发送到mq的请求失败：" + correlationId + "/mqSendTopMsg");
+            return "mqSendTopMsg发送到mq的请求失败...";
         }
     }
 
     @RequestMapping (value = "/mqUI", method = RequestMethod.GET)
-    public String mqUI()  {
+    public String mqUI() {
         return "/mq/mqUI";
     }
 }

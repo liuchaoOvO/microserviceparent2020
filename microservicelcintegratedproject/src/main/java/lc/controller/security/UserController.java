@@ -22,7 +22,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Created by CoderTnT on 2018/7/31.
+ * @author liuchaoOvO on 2019/4/11
+ * @description 用户相关Controller
  */
 @Controller
 @RequestMapping (value = "/user")

@@ -45,8 +45,8 @@ public class RabbitConfig {
     public static final String TopicExchange_ROUTINGKEYThird = "topic.second.third";
 
     //绑定键  用于把交换机的消息绑定到队列
-    public final static String TopicROUTINGKEYOne = "topic.*";
-    public final static String TopicROUTINGKEYAll = "topic.#";
+    public final static String TopicROUTINGKEYOne = "topic.*";  //表达式适合topic.开头的下一级
+    public final static String TopicROUTINGKEYAll = "topic.#";  //表达式适合topic.开头的所有
 
     //队列
     public static final String QUEUE_A = "QUEUE_A";

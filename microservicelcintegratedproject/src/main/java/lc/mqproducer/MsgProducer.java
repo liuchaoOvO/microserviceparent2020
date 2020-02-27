@@ -29,17 +29,11 @@ public class MsgProducer implements RabbitTemplate.ConfirmCallback {
         rabbitTemplate.setConfirmCallback(this); //rabbitTemplate如果为单例的话，那回调就是最后设置的内容
     }
 
-    public String sendTopicMsg(String content) {
-        CorrelationData correlationId = new CorrelationData(UUID.randomUUID().toString());
-        //把消息放入TopicROUTINGKEY_B对应的队列当中去
-        rabbitTemplate.convertAndSend(RabbitConfig.TopicExchange_B, RabbitConfig.TopicExchange_ROUTINGKEYThird, content, correlationId);
-        return correlationId.toString();
-    }
-
+    //直接 点对点
     public String mqSendUserObj(Object object) {
         try {
             CorrelationData correlationId = new CorrelationData(UUID.randomUUID().toString());
-            //把消息放入ROUTINGKEY_A对应的队列当中去，对应的是队列A
+            //把消息放入DirectExchange_ROUTINGKEY对应的队列当中去，对应的是队列A
             rabbitTemplate.convertAndSend(RabbitConfig.DirectExchange_A, RabbitConfig.DirectExchange_ROUTINGKEY, object, correlationId);
             return correlationId.toString();
         } catch (Exception e) {
@@ -48,10 +42,43 @@ public class MsgProducer implements RabbitTemplate.ConfirmCallback {
         }
     }
 
+    public String sendTopicMsg(String content) {
+        CorrelationData correlationId = new CorrelationData(UUID.randomUUID().toString());
+        //把消息放入TopicExchange_ROUTINGKEYThird对应的队列当中去，对应的是队列D  因为topic.second.third 满足表达式topic.# 而不满足topic.*
+        rabbitTemplate.convertAndSend(RabbitConfig.TopicExchange_B, RabbitConfig.TopicExchange_ROUTINGKEYThird, content, correlationId);
+        return correlationId.toString();
+    }
+
+    public String mqSendTopicAll(Object object) {
+        try {
+            CorrelationData correlationId = new CorrelationData(UUID.randomUUID().toString());
+            //把消息放入TopicExchange_ROUTINGKEYThird对应的队列当中去，对应的是队列D  因为topic.second.third 满足表达式topic.# 而不满足topic.*
+            rabbitTemplate.convertAndSend(RabbitConfig.TopicExchange_B, RabbitConfig.TopicExchange_ROUTINGKEYThird, object, correlationId);
+            return correlationId.toString();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
+
+    //话题
+    public String mqSendTopicOne(Object object) {
+        try {
+            CorrelationData correlationId = new CorrelationData(UUID.randomUUID().toString());
+            //把消息放入TopicExchange_ROUTINGKEYSecond对应的队列当中去，对应的是队列C和D  因为topic.second 满足表达式topic.# 和 topic.*
+            rabbitTemplate.convertAndSend(RabbitConfig.TopicExchange_B, RabbitConfig.TopicExchange_ROUTINGKEYSecond, object, correlationId);
+            return correlationId.toString();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
+
+    //广播
     public String mqSendFanoutObj(Object object) {
         try {
             CorrelationData correlationId = new CorrelationData(UUID.randomUUID().toString());
-            //把消息放入ROUTINGKEY_A对应的队列当中去，对应的是队列A
+            //把消息放入FanoutExchange_C对应的队列当中去，对应的是队列QUEUE_Fanout_A和QUEUE_Fanout_B
             rabbitTemplate.convertAndSend(RabbitConfig.FanoutExchange_C, null, object, correlationId);
             return correlationId.toString();
         } catch (Exception e) {
@@ -60,17 +87,6 @@ public class MsgProducer implements RabbitTemplate.ConfirmCallback {
         }
     }
 
-    public String mqSendTopicObj(Object object) {
-        try {
-            CorrelationData correlationId = new CorrelationData(UUID.randomUUID().toString());
-            //把消息放入ROUTINGKEY_A对应的队列当中去，对应的是队列A
-            rabbitTemplate.convertAndSend(RabbitConfig.TopicExchange_B, RabbitConfig.TopicExchange_ROUTINGKEYThird, object, correlationId);
-            return correlationId.toString();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "";
-        }
-    }
 
     /**
      * 回调
@@ -86,13 +102,13 @@ public class MsgProducer implements RabbitTemplate.ConfirmCallback {
     }
 
     public String sendSecKillMsg(SeckillMessage message) {
+        CorrelationData correlationId = new CorrelationData(UUID.randomUUID().toString());
         try {
-            CorrelationData correlationId = new CorrelationData(UUID.randomUUID().toString());
             rabbitTemplate.convertAndSend(RabbitConfig.DirectExchange_A, RabbitConfig.DirectExchange_SecKillROUTINGKEY, message, correlationId);
             return "sendSecKill发送成功，" + correlationId.toString();
         } catch (Exception e) {
             e.printStackTrace();
-            return "";
+            return "sendSecKill发送失败，" + correlationId.toString();
         }
     }
 }

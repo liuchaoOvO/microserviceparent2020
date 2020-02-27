@@ -15,7 +15,8 @@ import javax.servlet.http.HttpSession;
 import java.awt.image.BufferedImage;
 
 /**
- * Created by CoderTnT on 2018/8/24.
+ * @author liuchaoOvO on 2019/4/11
+ * @description 验证码
  */
 @Controller
 public class CodeController
