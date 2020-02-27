@@ -11,5 +11,6 @@
 /microserviceproviderhystrix/target/
 /microservicezuul/target/
 /microserviceclcintegratedproject/target/
+/microservicetxlcnmanager/target/
 /.idea
 .txlcn/microservicecloud-lcintegratedproject-12580.mv.db
