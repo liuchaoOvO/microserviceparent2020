@@ -9,7 +9,7 @@ mybatis:
 
 spring:
   application:
-    name: microservicecloud-lcintegratedproject                #微服务的名字
+    name: microservice-lcintegratedproject                #微服务的名字
   ###################以下为druid增加的配置#####################
   datasource:
     driverClassName: com.mysql.jdbc.Driver                      # mysql驱动包
@@ -66,8 +66,8 @@ eureka:
 info:
   app.name: microservicecloud-lcintegratedproject
   company.name: www.lc.com
-  build.artifactId: microservicelcintegratedproject
-  build.version: 1.0-SNAPSHOT
+  build.artifactId: ${project.artifactId}
+  build.version: ${project.version}
 logging:
   level:
     com.codingapi: debug
