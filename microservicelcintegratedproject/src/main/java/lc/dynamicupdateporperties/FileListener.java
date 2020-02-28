@@ -1,4 +1,4 @@
-package lc;
+package lc.dynamicupdateporperties;
 
 import java.io.File;
 

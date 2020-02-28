@@ -1,6 +1,5 @@
-package lc;
+package lc.dynamicupdateporperties;
 
-import lc.Event.EventType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -40,7 +39,7 @@ public class ListenerActuator {
 
     private Object runListener(FileListener fileListener, Event event) {
 
-        EventType eventType = event.getEventType();
+        Event.EventType eventType = event.getEventType();
         try {
             switch (eventType) {
                 case DELETE:

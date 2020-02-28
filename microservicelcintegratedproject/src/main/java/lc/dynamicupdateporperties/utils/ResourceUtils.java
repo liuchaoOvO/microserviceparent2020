@@ -1,4 +1,4 @@
-package lc.util;
+package lc.dynamicupdateporperties.utils;
 
 import java.io.*;
 import java.net.URL;
@@ -57,14 +57,13 @@ public class ResourceUtils extends Object {
     }
 
 
-
-
     /** */
     /**
      * Returns a resource on the classpath as a Stream object
      * note:there will cache the stram object,If you don't reopen too often,
      * please choose this method，but this will cause you can't get dynamically
      * get the latest content of the file because of the cache .
+     *
      * @param resource The resource to find
      * @return The resource
      * @throws IOException If the resource cannot be found or read

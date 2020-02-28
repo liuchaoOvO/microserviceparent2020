@@ -1,4 +1,4 @@
-package lc;
+package lc.dynamicupdateporperties;
 
 import org.apache.commons.collections.CollectionUtils;
 
@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * listner 注册中心
+ * File Listner 注册中心
  *
  * @author liuchaoOvO
  * @date 2019/3/21 上午11:08

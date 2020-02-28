@@ -22,13 +22,21 @@
     fanoutObj_code： <input type="password" id="fanoutObj_code" name="fanoutObj_code" placeholder="请输入fanoutObj_code" /><br/>
     <input type="submit"   value="发送/mq/mqSendFanoutObj post请求" />
 </form><br/>
-<h1>验证TopicExchange 模式</h1>
-<form name="form" th:action="@{/mq/mqSendTopicObj}"  method="post">
+<h1>验证TopicExchange TopicAll模式</h1>
+<form name="form" th:action="@{/mq/mqSendTopicAll}" method="post">
     fanoutObj_id： <input type="text" id="topicObj_id" name="topicObj_id"  placeholder="请输入topicObj_id" /><br/>
     fanoutObj_name： <input type="password" id="topicObj_name" name="topicObj_name" placeholder="请输入topicObj_name" /><br/>
     fanoutObj_code： <input type="password" id="topicObj_code" name="topicObj_code" placeholder="请输入topicObj_code" /><br/>
-    <input type="submit"   value="发送/mq/mqSendTopicObj post请求" />
+    <input type="submit" value="发送/mq/mqSendTopicAll post请求"/>
 </form><br/>
+<h1>验证TopicExchange TopicOne模式</h1>
+<form name="form" th:action="@{/mq/mqSendTopicOne}" method="post">
+    fanoutObj_id： <input type="text" name="topicObj_id" placeholder="请输入topicObj_id"/><br/>
+    fanoutObj_name： <input type="password" name="topicObj_name" placeholder="请输入topicObj_name"/><br/>
+    fanoutObj_code： <input type="password" name="topicObj_code" placeholder="请输入topicObj_code"/><br/>
+    <input type="submit" value="发送/mq/mqSendTopicOne post请求"/>
+</form>
+<br/>
 </div>
 </body>
 </html>

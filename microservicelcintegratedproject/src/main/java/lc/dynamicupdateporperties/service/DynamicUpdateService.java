@@ -1,11 +1,11 @@
-package lc.service;
+package lc.dynamicupdateporperties.service;
 
-import lc.FileListener;
-import lc.FileMonitor;
-import lc.util.ResourceUtils;
+
+import lc.dynamicupdateporperties.FileListener;
+import lc.dynamicupdateporperties.FileMonitor;
+import lc.dynamicupdateporperties.utils.ResourceUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.util.Strings;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.BeanPostProcessor;
@@ -23,40 +23,45 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author liuchaoOvO
  * @date 2019/3/22 下午10:17
  */
+@Slf4j
 @Service
-public class IniService implements BeanPostProcessor {
+public class DynamicUpdateService implements BeanPostProcessor {
     //本地缓存变量，存放配置表中的所有键值对
     private static final ConcurrentHashMap<String, String> iniMap = new ConcurrentHashMap<String, String>();
 
-    private static final Logger logger = LoggerFactory.getLogger(IniService.class);
     @Value ("${spring.application.name}")
     private String serviceId;
 
-    public IniService() {
-        logger.info("IniService===minor");
-//        minor();
+    public DynamicUpdateService() {
+        log.debug("DynamicUpdateService.Constructions....");
+    }
+
+    @Override
+    public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
+        log.debug("DynamicUpdateService.postProcessAfterInitialization->to do minor method...");
+        minor();
+        return bean;
     }
 
     public void minor() {
-        logger.info("====minor===");
+        log.debug("DynamicUpdateService.minor....");
         refresh();
-
-        //需要监听的配置文件
-        String dir = System.getProperty("user.dir") + "\\" + serviceId + "/src/main/resources/lc.properties";
+        //需要监听的配置文件dirpath
+        serviceId = serviceId.replace("-", ""); //文件夹中的microservicecloud-lcintegratedproject  - 不显示
+        String dir = System.getProperty("user.dir") + "\\" + serviceId + "/src/main/resources/lcpersionalized.properties";
         dir = dir.replace("\\", "/");
-        logger.debug("需要监听的配置文件的dir:{}", dir);
-
+        log.debug("需要监听的配置文件的dir:{}", dir);
         FileMonitor fileMonitor = new FileMonitor(dir, 60);
         fileMonitor.registerFileListener(dir, new FileListener() {
             //当文件改变时 将触发此方法,重新刷新配置
             @Override
             public void onFileChange(File file) {
                 try {
-                    logger.info("====onFileChange===");
+                    log.debug("fileListener.onFileChange...");
                     InputStream inputStream = new FileInputStream(file);
                     refresh(inputStream);
                 } catch (Exception e) {
-                    logger.info("fail to execute file change because of:{}", e);
+                    log.debug("fail to execute file change because of:{}", e);
                 }
 
             }
@@ -91,33 +96,28 @@ public class IniService implements BeanPostProcessor {
     }
 
 
-    public static int refresh() {
-        logger.info("start to load config");
-        int count = 0;
+    public void refresh() {
+        log.debug("refresh->start to load persionalized config start...");
         try {
-            refresh(ResourceUtils.getResourceAsStream("lc.properties"));
+            refresh(ResourceUtils.getResourceAsStream("lcpersionalized.properties"));
         } catch (IOException e) {
             e.printStackTrace();
-            logger.info("fail to refresh because of:{}", e);
+            log.debug("fail to refresh because of:{}", e);
         }
-        logger.info("refresh config count:{}", count);
-        return count;
+        log.debug("refresh->start to load persionalized config end....");
     }
 
 
-    private static int refresh(InputStream in) {
-        logger.info("====refresh===");
-        int count = 0;
+    private void refresh(InputStream in) {
+        log.debug("refresh->start to load lcpersionalized.properties config start...");
         Properties props = new Properties();
         try {
             props.load(in);
             for (Map.Entry entry : props.entrySet()) {
                 iniMap.put(entry.getKey().toString(), entry.getValue().toString());
-                count++;
             }
-
         } catch (IOException e) {
-            logger.info("fail to load because :{}", e.getMessage());
+            log.debug("fail to load because :{}", e.getMessage());
         } finally {
             try {
                 in.close();
@@ -125,9 +125,7 @@ public class IniService implements BeanPostProcessor {
 
             }
         }
-        logger.info("refresh config count:{}", count);
-        return count;
-
+        log.debug("refresh->start to load lcpersionalized.properties config end....");
     }
 
 
@@ -140,10 +138,5 @@ public class IniService implements BeanPostProcessor {
         return iniMap.get(name);
     }
 
-    @Override
-    public Object postProcessAfterInitialization(Object bean, String beanName)
-            throws BeansException {
-        minor();
-        return bean;
-    }
+
 }

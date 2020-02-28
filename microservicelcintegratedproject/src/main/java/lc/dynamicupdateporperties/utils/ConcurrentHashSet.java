@@ -1,4 +1,4 @@
-package lc.util;
+package lc.dynamicupdateporperties.utils;
 
 import java.util.AbstractSet;
 import java.util.Collection;
@@ -28,8 +28,6 @@ public class ConcurrentHashSet<E> extends AbstractSet<E> {
     }
 
 
-
-
     public int size() {
         return this.map.size();
     }
@@ -52,7 +50,7 @@ public class ConcurrentHashSet<E> extends AbstractSet<E> {
 
 
     public boolean add(E o) {
-        Boolean answer = (Boolean)((ConcurrentMap)this.map).putIfAbsent(o, Boolean.TRUE);
+        Boolean answer = (Boolean) ((ConcurrentMap) this.map).putIfAbsent(o, Boolean.TRUE);
         return answer == null;
     }
 

@@ -1,4 +1,4 @@
-package lc.util;
+package lc.dynamicupdateporperties.utils;
 
 import java.io.*;
 import java.util.Properties;

@@ -1,4 +1,4 @@
-package lc;
+package lc.dynamicupdateporperties;
 
 /**
  * @author liuchaoOvO

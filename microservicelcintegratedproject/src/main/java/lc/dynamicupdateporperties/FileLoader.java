@@ -1,11 +1,10 @@
-package lc;
+package lc.dynamicupdateporperties;
 
-import lc.Event.EventType;
-import lc.util.ConcurrentHashSet;
-import lc.util.FileUtils;
+
+import lc.dynamicupdateporperties.utils.ConcurrentHashSet;
+import lc.dynamicupdateporperties.utils.FileUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.util.Iterator;
@@ -20,32 +19,21 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author liuchaoOvO
  * @date 2019/3/21 下午2:29
  */
+@Slf4j
 public final class FileLoader {
 
     private final static int DEFAULT_INTERVAL_SECONDS = 5;
-    private static final Logger logger = LoggerFactory.getLogger(FileLoader.class);
-
     ListenerActuator actuator = ListenerActuator.getInstance();
-
     private final ConcurrentHashMap<String, Long> fileLastModified = new ConcurrentHashMap<>();
-
-    //存放上次已有的文件 考虑用hashSet?
+    //存放上次已有的文件 考虑用hashSet
     private volatile ConcurrentHashSet<String> lastFilesInfo = new ConcurrentHashSet<>();
-
     //存放当前已有的文件信息 考虑用hashSet
     private volatile ConcurrentHashSet<String> currentFilesInfo = new ConcurrentHashSet<>();
-
     private final FileListnerRegister fileListnerRegister;
-
-
     Thread loadThread;
-
     private final String[] dirs;
-
     int loaderingIntervalSeconds;
-
     volatile boolean running = true;
-
 
     public FileLoader(String[] dirs, int loaderingIntervalSeconds, FileListnerRegister fileListnerRegister) {
 
@@ -126,14 +114,14 @@ public final class FileLoader {
         ConcurrentHashSet<String> fileInfo = new ConcurrentHashSet<>();
         for (int i = 0; i < dirs.length; i++) {
             List<File> files = FileUtils.getAllFile(dirs[i]);
-            LoadcurrentFilesInfo(files, fileInfo);
+            loadcurrentFilesInfo(files, fileInfo);
         }
         lastFilesInfo = currentFilesInfo;
         currentFilesInfo = fileInfo;
     }
 
 
-    public void LoadcurrentFilesInfo(List<File> files, ConcurrentHashSet set) {
+    public void loadcurrentFilesInfo(List<File> files, ConcurrentHashSet set) {
         if (CollectionUtils.isEmpty(files)) {
             return;
         }
@@ -152,16 +140,16 @@ public final class FileLoader {
             List<FileListener> listeners = fileListnerRegister.getListnerCopy(path);
             File file = new File(path);
             if (isChange(file)) {
-                logger.info("file :{} has changed", file.getAbsolutePath());
-                actuator.run(listeners, new Event(file, EventType.CHANGE));
+                log.debug("file :{} has changed", file.getAbsolutePath());
+                actuator.run(listeners, new Event(file, Event.EventType.CHANGE));
             }
             if (isCreate(file)) {
-                logger.info("file :{} has been created", file.getAbsolutePath());
-                actuator.run(listeners, new Event(file, EventType.CREATE));
+                log.debug("file :{} has been created", file.getAbsolutePath());
+                actuator.run(listeners, new Event(file, Event.EventType.CREATE));
             }
             if (isDelete(file)) {
-                logger.info("file :{} has been deleted", file.getAbsolutePath());
-                actuator.run(listeners, new Event(file, EventType.DELETE));
+                log.debug("file :{} has been deleted", file.getAbsolutePath());
+                actuator.run(listeners, new Event(file, Event.EventType.DELETE));
             }
         }
 
@@ -179,7 +167,7 @@ public final class FileLoader {
         String fileAbsolutePath = file.getAbsolutePath();
         if ((fileLastModified.get(fileAbsolutePath) != null) &&
                 (file.lastModified() != fileLastModified.get(fileAbsolutePath))) {//文件已改变
-            logger.debug("file :{} has been changed", file.getAbsoluteFile());
+            log.debug("file :{} has been changed", file.getAbsoluteFile());
             fileLastModified.put(fileAbsolutePath, file.lastModified()); //更新文件的本次改变时间
             return true;
         }
