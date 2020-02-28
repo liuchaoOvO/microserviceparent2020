@@ -1,4 +1,6 @@
 # Project exclude paths
+/.idea
+/.txlcn
 /microserviceconfigclient/target/
 /microserviceconfigserver/target/
 /microserviceconsumer/target/
@@ -12,5 +14,4 @@
 /microservicezuul/target/
 /microserviceclcintegratedproject/target/
 /microservicetxlcnmanager/target/
-/.idea
-/.txlcn
+/providerdynamicupdateporperties/target/
