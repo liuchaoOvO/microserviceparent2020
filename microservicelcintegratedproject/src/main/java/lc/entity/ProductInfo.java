@@ -1,6 +1,9 @@
 package lc.entity;
 
-import lombok.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -12,9 +15,7 @@ import java.util.Date;
 @Getter
 @ToString
 @EqualsAndHashCode
-public class ProductInfo
-{
-
+public class ProductInfo {
     private String productId;
     /**
      * 产品名
@@ -39,18 +40,20 @@ public class ProductInfo
     /**
      * 商品状态 0正常 1下架
      */
-    private Integer productStatus =0;
+    private Integer productStatus = 0;
     /**
      * 类目编号
      */
     private Integer categoryType;
 
-    /** 创建日期*/
+    /**
+     * 创建日期
+     */
     private Date createTime;
-    /**更新时间 */
+    /**
+     * 更新时间
+     */
     private Date updateTime;
-
-
 
     public ProductInfo(String productId) {
         this.productId = productId;

@@ -12,7 +12,6 @@
     <artifactId>providerdynamicupdateporperties</artifactId>
 
     <dependencies>
-
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>

@@ -9,6 +9,7 @@ import org.springframework.context.event.ContextRefreshedEvent;
 */
 /**
  * @author liuchaoOvO on 2019/4/22
+ * @description 应用刷新启动执行事件方法
  *//*
 
 public class ApplicationStartup implements ApplicationListener<ContextRefreshedEvent>

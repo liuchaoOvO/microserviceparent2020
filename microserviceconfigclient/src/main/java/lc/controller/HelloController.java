@@ -10,13 +10,12 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RefreshScope //开启更新功能
 @RestController
-public class HelloController
-{
+public class HelloController {
 
-    @Value("${parameter}")
+    @Value ("${parameter}")
     private String profile;
 
-    @GetMapping("/info")
+    @GetMapping ("/info")
     public String hello() {
         return profile;
     }

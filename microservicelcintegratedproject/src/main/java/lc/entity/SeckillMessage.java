@@ -20,16 +20,18 @@ public class SeckillMessage {
 
     private SysUser user;
     private long goodsId;
-    public SeckillMessage(){
+
+    public SeckillMessage() {
 
     }
+
     //增加一个构造函数来手动赋值
-    public SeckillMessage(String json) throws IOException
-    {
+    public SeckillMessage(String json) throws IOException {
         SeckillMessage param = new ObjectMapper().readValue(json, SeckillMessage.class);
-        this.user=param.getUser();
+        this.user = param.getUser();
         this.goodsId = param.getGoodsId();
     }
+
     public SysUser getUser() {
         return user;
     }

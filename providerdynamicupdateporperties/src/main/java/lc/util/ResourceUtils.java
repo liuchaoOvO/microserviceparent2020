@@ -5,7 +5,7 @@ import java.net.URL;
 import java.util.Properties;
 
 /**
- * @author jianglinzou
+ * @author liuchaoOvO
  * @date 2019/3/11 下午1:12
  */
 public class ResourceUtils extends Object {

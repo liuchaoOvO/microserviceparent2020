@@ -12,12 +12,12 @@ import lombok.ToString;
 @Getter
 @ToString
 @EqualsAndHashCode
-public class SysVersion
-{
+public class SysVersion {
     private static final long serialVersionUID = 1L;
-    public SysVersion()
-    {
+
+    public SysVersion() {
     }
+
     private String id;
     private String sqlFileName;
     private String execTime;

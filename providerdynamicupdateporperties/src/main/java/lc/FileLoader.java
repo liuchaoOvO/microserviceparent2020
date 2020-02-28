@@ -17,7 +17,7 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * 负责加载文件
  *
- * @author
+ * @author liuchaoOvO
  * @date 2019/3/21 下午2:29
  */
 public final class FileLoader {
@@ -170,7 +170,7 @@ public final class FileLoader {
 
 
     /**
-     * 如果该方法返回true 代表该文件
+     * 如果该方法返回true 代表该文件 has been changed
      *
      * @param file
      * @return

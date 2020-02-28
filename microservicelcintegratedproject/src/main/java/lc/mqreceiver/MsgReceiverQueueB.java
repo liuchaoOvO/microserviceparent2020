@@ -19,10 +19,11 @@ import org.springframework.stereotype.Component;
 @Component
 @RabbitListener (queues = RabbitConfig.QUEUE_B, containerFactory = "rabbitListenerContainerFactory")
 public class MsgReceiverQueueB {
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //处理User的Service
     @Autowired
     private UserService service;
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
     @RabbitHandler
     public void processRegist(@Payload SysUser obj) {
         try {

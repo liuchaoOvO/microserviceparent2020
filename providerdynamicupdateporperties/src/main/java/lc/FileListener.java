@@ -5,7 +5,7 @@ import java.io.File;
 /**
  * 文件监听器，当对应的文件该变时，应该触发此监听器对应的方法
  *
- * @author jianglinzou
+ * @author liuchaoOvO
  * @date 2019/3/21 上午10:47
  */
 public interface FileListener extends ShouldAccept {

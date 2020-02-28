@@ -117,10 +117,10 @@ public class OpLogAspectBO {
                 // 计算日志信息表达式
                 EvaluationContext evlContext = new StandardEvaluationContext();
                 for (int i = 0; i < arguments.length; i++) {
-              /*
-               * jdk1.8+ 可通过 method.getParameters() 读取参数名称 jdk1.6
-               * 只能用参数序号，arg0、arg1...，不能用参数名称
-               */
+                    /*
+                     * jdk1.8+ 可通过 method.getParameters() 读取参数名称 jdk1.6
+                     * 只能用参数序号，arg0、arg1...，不能用参数名称
+                     */
                     evlContext.setVariable("arg" + i, arguments[i]);
                 }
                 logMsg = getExpressionValue(logExp, evlContext);

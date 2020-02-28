@@ -10,7 +10,7 @@ spring:
     url: jdbc:mysql://localhost:3306/springboot?characterEncoding=utf-8&useSSL=false
     username: test
     password: 1
-     # 下面为连接池的补充设置，应用到上面所有数据源中
+    # 下面为连接池的补充设置，应用到上面所有数据源中
     # 初始化大小，最小，最大
     initialSize: 5
     minIdle: 5

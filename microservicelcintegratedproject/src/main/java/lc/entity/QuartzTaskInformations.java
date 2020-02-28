@@ -1,5 +1,8 @@
 package lc.entity;
 
+import lombok.Data;
+
+@Data
 public class QuartzTaskInformations {
     private Long id;
 

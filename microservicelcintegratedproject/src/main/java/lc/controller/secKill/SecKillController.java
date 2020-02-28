@@ -33,7 +33,6 @@ import java.util.concurrent.TimeUnit;
 public class SecKillController {
     private static final Logger logger = LoggerFactory.getLogger(SecKillController.class);
 
-
     @Autowired
     private RedisUtil redisUtil;
     @Autowired
@@ -58,10 +57,6 @@ public class SecKillController {
         }
         //内存标记，减少redis访问
         boolean over = false;
-               /* if (localOverMap.get(goodsId) == null)
-                {
-                    over = false;
-                } else over = localOverMap.get(goodsId);*/
         if (over) {
             return "500500, 商品已经秒杀完毕";
         }
@@ -84,9 +79,10 @@ public class SecKillController {
         SeckillMessage message = new SeckillMessage();
         message.setUser(sysUser);
         message.setGoodsId(goodsId);
-        msgProducer.sendSecKillMsg(message);
+        String sendMsg = msgProducer.sendSecKillMsg(message);
         Status status = new Status<String>();
         status.setCode(0);
+        status.setMsg(sendMsg);
         model.addAttribute(status);
         model.addAttribute("goodsId", goodsId);
         model.addAttribute("userId", sysUser.getId());

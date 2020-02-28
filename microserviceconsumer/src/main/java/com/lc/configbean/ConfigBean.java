@@ -9,11 +9,10 @@ import org.springframework.web.client.RestTemplate;
  * @author liuchaoOvO on 2019/3/15
  */
 @Configuration
-public class ConfigBean
-{
+public class ConfigBean {
     @Bean
     @LoadBalanced
-    public RestTemplate getRestTemplate(){
+    public RestTemplate getRestTemplate() {
         return new RestTemplate();
     }
 }

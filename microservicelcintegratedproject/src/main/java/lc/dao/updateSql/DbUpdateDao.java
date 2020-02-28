@@ -13,11 +13,10 @@ import java.util.Map;
  */
 
 @Mapper
-public interface DbUpdateDao
-{
-    @Select("select sql_file_name  from SYS_INSTALL_SQL")
+public interface DbUpdateDao {
+    @Select ("select sql_file_name  from SYS_INSTALL_SQL")
     List<Map<String, String>> getFileMap(Connection conn);
 
-    void  judgeInitSql(String sql);
+    void judgeInitSql(String sql);
 }
 

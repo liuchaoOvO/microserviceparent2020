@@ -8,8 +8,7 @@ import lc.entity.SysUser;
 /**
  * @author liuchaoOvO on 2019/5/23
  */
-public interface OrderService
-{
+public interface OrderService {
 
     OrderInfo createOrder(SysUser user, GoodsVo goodsVo) throws Exception;
 

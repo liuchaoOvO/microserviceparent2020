@@ -1,12 +1,11 @@
 package lc.utils;
 
-import lc.FileLoader;
 import lc.service.IniService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * @author jianglinzou
+ * @author liuchaoOvO
  * @date 2019/3/22 下午10:20
  */
 public class IniUtil {
@@ -28,6 +27,7 @@ public class IniUtil {
             iniService = (IniService) SpringBeanUtils.getBean(IniService.class);
         }
     }
+
     /**
      * 获取配置项的值
      *
@@ -36,13 +36,12 @@ public class IniUtil {
      */
 
 
-
     public static String getIniValue(String name) {
 
-      ////  iniService.refresh();
+        //iniService.refresh();
 
         iniService.minor();
-           return   iniService.getIniValue(name);
+        return iniService.getIniValue(name);
 
     }
 

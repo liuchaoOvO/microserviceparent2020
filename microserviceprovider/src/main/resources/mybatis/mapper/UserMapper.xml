@@ -14,7 +14,4 @@
         insert into SYS_user(id,username,password,status,last_ver) values(#{id}, #{username}, #{password},#{status},#{last_ver})
     </insert>
 
-
-
-
 </mapper>

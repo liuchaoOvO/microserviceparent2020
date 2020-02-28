@@ -17,13 +17,10 @@ import org.slf4j.LoggerFactory;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * @ClassName    QuartzMainJobFactory
- * @Description 定时任务的主要执行逻辑，实现Job接口
- * @Author       liuchaoOvO
- * @Date         2019/1/7
- * Version       1.0
+ * @author liuchaoOvO on 2019/4/18
+ * @description 代理执行Job
  */
-//代理job
+
 @DisallowConcurrentExecution
 public class QuartzMainJobFactory implements Job {
 

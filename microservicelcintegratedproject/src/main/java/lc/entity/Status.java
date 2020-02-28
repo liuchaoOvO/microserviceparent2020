@@ -12,8 +12,8 @@ import lombok.ToString;
 @Getter
 @ToString
 @EqualsAndHashCode
-public class Status<T>
-{   private long code;
+public class Status<T> {
+    private long code;
     private String msg;
     private T data;
 }

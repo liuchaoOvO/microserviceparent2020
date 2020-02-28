@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.Properties;
 
 /**
- * @author jianglinzou
+ * @author liuchaoOvO
  * @date 2019/3/8 下午6:44
  */
 public class PropUtils {

@@ -1,7 +1,7 @@
 package lc;
 
 /**
- * @author jianglinzou
+ * @author liuchaoOvO
  * @date 2019/3/21 上午10:51
  */
 public interface ShouldAccept {
