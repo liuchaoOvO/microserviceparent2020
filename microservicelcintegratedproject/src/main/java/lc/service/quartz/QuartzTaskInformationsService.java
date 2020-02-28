@@ -1,7 +1,6 @@
 package lc.service.quartz;
 
 
-
 import lc.entity.QuartzTaskInformations;
 
 import java.util.List;

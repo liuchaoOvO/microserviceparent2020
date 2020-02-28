@@ -15,24 +15,24 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Component
-public class ValidateCodeFilter extends OncePerRequestFilter
-{
+public class ValidateCodeFilter extends OncePerRequestFilter {
 
     @Autowired
     private MyAuthenticationFailureHandler myAuthenticationFailureHandler;
+
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
-        if(StringUtils.equals("/user/login", httpServletRequest.getRequestURI())
+        if (StringUtils.equals("/user/login", httpServletRequest.getRequestURI())
                 && StringUtils.equalsIgnoreCase(httpServletRequest.getMethod(), "post")) {
             try {
                 // 1. 进行验证码的校验
-                String password= httpServletRequest.getParameter("password");
-                logger.info("前端输入的密码为："+password);
+                String password = httpServletRequest.getParameter("password");
+                logger.info("前端输入的密码为：" + password);
                 CodeUtil.checkVerifyCode(httpServletRequest);
             } catch (AuthenticationException e) {
                 // 2. 如果校验不通过，调用SpringSecurity的校验失败处理器
                 myAuthenticationFailureHandler.onAuthenticationFailure(httpServletRequest, httpServletResponse, e);
-                return ;
+                return;
             }
         }
         // 3. 校验通过，就放行

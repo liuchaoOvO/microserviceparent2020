@@ -10,8 +10,7 @@ import java.util.List;
  * @author liuchaoOvO on 2019/3/19
  */
 @Component
-public class ConsumerServiceFallbackFactory implements FallbackFactory<ConsumerService>
-{
+public class ConsumerServiceFallbackFactory implements FallbackFactory<ConsumerService> {
 
     @Override
     public ConsumerService create(Throwable arg0) {

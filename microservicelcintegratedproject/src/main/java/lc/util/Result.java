@@ -3,7 +3,7 @@ package lc.util;
 /**
  * @ClassName Result
  * @Description 接口统一返回result
- * @Author simonsfan
+ * @Author liuchaoOvO
  * @Date 2019/1/1
  * Version  1.0
  */

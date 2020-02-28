@@ -12,7 +12,8 @@ import springfox.documentation.spring.web.plugins.Docket;
 
 /**
  * @author liuchaoOvO on 2019/8/16
- *
+ * @description Swagger2配置类
+ * <p>
  * http://localhost:12580/swagger-ui.html
  */
 
@@ -20,7 +21,7 @@ import springfox.documentation.spring.web.plugins.Docket;
 @Configuration
 public class Swagger2Config {
     @Bean
-    public Docket config(){
+    public Docket config() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
@@ -28,11 +29,12 @@ public class Swagger2Config {
                 .paths(PathSelectors.any())
                 .build();
     }
-    private ApiInfo apiInfo(){
+
+    private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("LC集成的API文档")
                 .description("这是一段description描述：供测试使用的API")
-                .contact(new Contact("LC","https://www.baidu.com","liuchaoy@yonyou.com"))
+                .contact(new Contact("LC", "https://www.baidu.com", "liuchaoy@yonyou.com"))
                 .version("1.0")
                 .build();
     }

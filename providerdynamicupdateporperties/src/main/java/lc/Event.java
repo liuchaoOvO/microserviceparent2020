@@ -5,8 +5,7 @@ import java.io.File;
 /**
  * 文件产生的事件类
  *
- * @author jianglinzou
- * @date 2019/3/21 上午11:44
+ * @author liuchaoOvO
  */
 public class Event {
 
@@ -29,7 +28,9 @@ public class Event {
     }
 
 
-    /**事件类型*/
+    /**
+     * 事件类型
+     */
     enum EventType {
         CREATE,
         DELETE,

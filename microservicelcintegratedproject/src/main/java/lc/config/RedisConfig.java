@@ -14,21 +14,21 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 
 /**
- * @author: CoderTnT
- * @date: 2018/12/20
+ * @author: liuchaoOvO
+ * @description Redis配置类
  */
 @Configuration
 @EnableCaching
-public class RedisConfig extends CachingConfigurerSupport
-{
+public class RedisConfig extends CachingConfigurerSupport {
     @Bean
-    public RedisTemplate<String, String> redisTemplate(RedisConnectionFactory factory){
+    public RedisTemplate<String, String> redisTemplate(RedisConnectionFactory factory) {
         StringRedisTemplate template = new StringRedisTemplate(factory);
         setSerializer(template);//设置序列化工具
         template.afterPropertiesSet();
         return template;
     }
-    private void setSerializer(StringRedisTemplate template){
+
+    private void setSerializer(StringRedisTemplate template) {
         //使用Jackson2JsonRedisSerializer来序列化和反序列化redis的value值
         Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
         ObjectMapper om = new ObjectMapper();
@@ -36,7 +36,6 @@ public class RedisConfig extends CachingConfigurerSupport
         om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
         jackson2JsonRedisSerializer.setObjectMapper(om);
         template.setValueSerializer(jackson2JsonRedisSerializer);
-
         //使用StringRedisSerializer来序列化和反序列化redis的key值
         // template.setKeySerializer(new StringRedisSerializer());
         template.afterPropertiesSet();

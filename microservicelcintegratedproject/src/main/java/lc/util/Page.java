@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * @ClassName Page
  * @Description 分页实体类
- * @Author simonsfan
+ * @Author liuchaoOvO
  * @Date 2019/1/8
  * Version  1.0
  */
@@ -58,29 +58,29 @@ public class Page<T> implements Serializable {
     }
 
     public void setStartIndex(int startIndex) {
-        this.startIndex = pageSize * (currentPage-1);
+        this.startIndex = pageSize * (currentPage - 1);
     }
 
     public void setTotalPage(int totalPage) {
-        if(this.totalRecord % this.pageSize == 0) {
+        if (this.totalRecord % this.pageSize == 0) {
             this.totalPage = this.totalRecord / this.pageSize;
-        }else {
+        } else {
             this.totalPage = this.totalRecord / this.pageSize + 1;
         }
     }
 
     public void setPreviousPage(int previousPage) {
-        if(this.totalRecord % this.pageSize == 0) {
+        if (this.totalRecord % this.pageSize == 0) {
             this.totalPage = this.totalRecord / this.pageSize;
-        }else {
+        } else {
             this.totalPage = this.totalRecord / this.pageSize + 1;
         }
     }
 
     public void setNextPage(int nextPage) {
-        if(this.currentPage + 1 > this.totalPage) {
+        if (this.currentPage + 1 > this.totalPage) {
             this.nextPage = this.totalPage;
-        }else {
+        } else {
             this.nextPage = this.currentPage + 1;
         }
     }

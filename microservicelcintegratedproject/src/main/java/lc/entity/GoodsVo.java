@@ -14,8 +14,8 @@ import java.util.Date;
 @Getter
 @ToString
 @EqualsAndHashCode
-public class GoodsVo extends Goods
-{   private Double seckill_price;
+public class GoodsVo extends Goods {
+    private Double seckill_price;
     private Integer stock_count;
     private Date start_date;
     private Date end_date;

@@ -29,8 +29,7 @@ import java.util.Objects;
  * 客户端传入不同形式参数的解析器
  */
 @Component
-public class CustomMethodArgumentResolver implements HandlerMethodArgumentResolver, Ordered, ApplicationListener
-{
+public class CustomMethodArgumentResolver implements HandlerMethodArgumentResolver, Ordered, ApplicationListener {
 
     private RequestMappingHandlerAdapter requestMappingHandlerAdapter;
 

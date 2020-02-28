@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * listner 注册中心
  *
- * @author jianglinzou
+ * @author liuchaoOvO
  * @date 2019/3/21 上午11:08
  */
 public class FileListnerRegister {

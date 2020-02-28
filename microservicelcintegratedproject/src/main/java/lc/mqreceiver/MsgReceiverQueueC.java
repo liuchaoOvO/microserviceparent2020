@@ -13,14 +13,13 @@ import org.springframework.stereotype.Component;
  * @author liuchaoOvO on 2018/12/28
  */
 @Component
-@RabbitListener(queues = RabbitConfig.QUEUE_C,containerFactory = "rabbitListenerContainerFactory")
-public class MsgReceiverQueueC
-{
+@RabbitListener (queues = RabbitConfig.QUEUE_C, containerFactory = "rabbitListenerContainerFactory")
+public class MsgReceiverQueueC {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
     @RabbitHandler
-    public void processHandler(@Payload TopicObj obj)
-    {
-        logger.info("QUEUE_C--客户端收到的信息："+obj.toString());
+    public void processHandler(@Payload TopicObj obj) {
+        logger.info("QUEUE_C--客户端收到的信息：" + obj.toString());
     }
 }
 

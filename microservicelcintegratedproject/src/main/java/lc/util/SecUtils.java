@@ -13,11 +13,11 @@ public class SecUtils {
     /*
     创建虚拟订单
      */
-    public  static SecOrder createDummyOrder(ProductInfo productInfo){
+    public static SecOrder createDummyOrder(ProductInfo productInfo) {
         String key = UUIDUtil.getUniqueKey();
         SecOrder secOrder = new SecOrder();
         secOrder.setId(key);
-        secOrder.setUserId("userId="+key);
+        secOrder.setUserId("userId=" + key);
         secOrder.setProductId(productInfo.getProductId());
         secOrder.setProductPrice(productInfo.getProductPrice());
         secOrder.setAmount(productInfo.getProductPrice());
@@ -27,10 +27,10 @@ public class SecUtils {
     /*
     伪支付
      */
-    public static  boolean dummyPay(){
+    public static boolean dummyPay() {
         Random random = new Random();
         int result = random.nextInt(1000) % 2;
-        if (result == 0){
+        if (result == 0) {
             return true;
         }
         return false;

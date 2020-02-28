@@ -8,7 +8,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 /**
- * @author jianglinzou
+ * @author liuchaoOvO
  * @date 2019/3/9 下午9:24
  */
 public class ConcurrentHashSet<E> extends AbstractSet<E> {

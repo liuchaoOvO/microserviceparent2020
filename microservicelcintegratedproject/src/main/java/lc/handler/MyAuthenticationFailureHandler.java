@@ -12,15 +12,15 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Created by CoderTnT on 2018/8/2.
+ * Created by liuchaoOvO on 2018/8/2.
  */
 @Component
-public class MyAuthenticationFailureHandler extends SimpleUrlAuthenticationFailureHandler
-{
+public class MyAuthenticationFailureHandler extends SimpleUrlAuthenticationFailureHandler {
     private final static Logger logger = LoggerFactory.getLogger(MyAuthenticationFailureHandler.class);
+
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
         logger.info("认证失败");
-       super.onAuthenticationFailure(request, response, exception);
+        super.onAuthenticationFailure(request, response, exception);
     }
 }

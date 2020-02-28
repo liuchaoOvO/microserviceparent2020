@@ -8,13 +8,13 @@ import org.springframework.context.annotation.Configuration;
 import java.util.Properties;
 
 /**
- * Created by CoderTnT on 2018/8/24.
+ * @author liuchaoOvO on 2018/8/24.
+ * @description 登录验证码配置类
  */
 @Configuration
-public class KaptchaConfig
-{
+public class KaptchaConfig {
     @Bean
-    public DefaultKaptcha getDefaultKaptcha(){
+    public DefaultKaptcha getDefaultKaptcha() {
         DefaultKaptcha captchaProducer = new DefaultKaptcha();
         Properties properties = new Properties();
         properties.setProperty("kaptcha.border", "yes");

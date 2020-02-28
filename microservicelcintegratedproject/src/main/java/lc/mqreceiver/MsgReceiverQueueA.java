@@ -1,4 +1,3 @@
-
 package lc.mqreceiver;
 
 import lc.config.RabbitConfig;
@@ -15,14 +14,13 @@ import org.springframework.stereotype.Component;
  */
 
 @Component
-@RabbitListener(queues = RabbitConfig.QUEUE_A,containerFactory = "rabbitListenerContainerFactory")
-public class MsgReceiverQueueA
-{
+@RabbitListener (queues = RabbitConfig.QUEUE_A, containerFactory = "rabbitListenerContainerFactory")
+public class MsgReceiverQueueA {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
     @RabbitHandler
-    public void processHandler(@Payload SysUser obj)
-    {
-        logger.info("用户信息："+obj.toString());
+    public void processHandler(@Payload SysUser obj) {
+        logger.info("用户信息：" + obj.toString());
     }
 }
 

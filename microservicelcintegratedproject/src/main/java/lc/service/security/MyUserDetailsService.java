@@ -15,22 +15,21 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * Created by CoderTnT on 2018/7/31.
+ * Created by liuchaoOvO on 2018/7/31.
  */
 @Component
-public class MyUserDetailsService implements UserDetailsService
-{
+public class MyUserDetailsService implements UserDetailsService {
     @Autowired
     private SysUserMapper sysUserMapper;
 
     @Autowired
     private MsgProducer msgProducer;
+
     /*//注册用户
     public boolean registUser(SysUser user){
         if(stringRedisService.get(user.getUsername()) != null){
@@ -73,16 +72,15 @@ public class MyUserDetailsService implements UserDetailsService
     }
     //重写UserDetailsService的UserDetails方法@param username*/
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException
-    {
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         SysUser user;
-         // 从数据库取user
+        // 从数据库取user
          /* 1,使用特定注解方式
         user = sysUserMapper.findUserByUsername(username);
          */
-         //2,使用注解指定某个工具类的方法来动态编写SQL.
+        //2,使用注解指定某个工具类的方法来动态编写SQL.
         user = sysUserMapper.findUserByUsernameProvider(username);
-        if(user == null)
+        if (user == null)
             throw new UsernameNotFoundException(String.format("No user found with username '%s'.", username));
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
         List<SysRole> sysRoles = sysUserMapper.findRolesByUsername(user.getUsername());
@@ -90,14 +88,14 @@ public class MyUserDetailsService implements UserDetailsService
             //封装用户信息和角色信息 到 SecurityContextHolder全局缓存中
             grantedAuthorities.add(new SimpleGrantedAuthority(sysRole.getName()));
         }
-        for(int i=0;i<grantedAuthorities.size();i++){
-            System.out.println("权限:"+grantedAuthorities.get(i));
+        for (int i = 0; i < grantedAuthorities.size(); i++) {
+            System.out.println("权限:" + grantedAuthorities.get(i));
         }
-        Boolean status=sysUserMapper.findUserStatusByUsername(username);
-        Map<String, SysUser> map=new ConcurrentHashMap();
-        map.put("user",user);
+        Boolean status = sysUserMapper.findUserStatusByUsername(username);
+        Map<String, SysUser> map = new ConcurrentHashMap();
+        map.put("user", user);
         //放入线程本地类中
         CommonUtil.threadLocal.set(map);
-        return new User(user.getUsername(),  user.getPassword(), true, true, true, status, grantedAuthorities);
+        return new User(user.getUsername(), user.getPassword(), true, true, true, status, grantedAuthorities);
     }
 }

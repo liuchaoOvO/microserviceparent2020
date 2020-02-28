@@ -4,7 +4,6 @@ package lc.util;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.httpclient.*;
 import org.apache.commons.httpclient.cookie.CookiePolicy;
-import org.apache.commons.httpclient.methods.ByteArrayRequestEntity;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.methods.StringRequestEntity;
@@ -16,7 +15,7 @@ import org.slf4j.LoggerFactory;
 /**
  * @ClassName HttpClientUtil
  * @Description httpclient get/post方式调用接口
- * @Author simonsfan
+ * @Author liuchaoOvO
  * @Date 2019/1/7
  * Version  1.0
  */
@@ -89,13 +88,13 @@ public class HttpClientUtil {
         try {
             //1、使用JSONObject
             System.out.println(content);
-         //   String s="{'id':'100','username':'qw','password':'er'}";
-            if(content.equalsIgnoreCase("\"\"")){
-                content=null;
+            //   String s="{'id':'100','username':'qw','password':'er'}";
+            if (content.equalsIgnoreCase("\"\"")) {
+                content = null;
             }
-            JSONObject jsonObject= JSONObject.parseObject(content);
-            if(jsonObject==null) jsonObject=new JSONObject();
-            method.setRequestEntity(new StringRequestEntity(jsonObject.toString(),contentType,"utf-8"));
+            JSONObject jsonObject = JSONObject.parseObject(content);
+            if (jsonObject == null) jsonObject = new JSONObject();
+            method.setRequestEntity(new StringRequestEntity(jsonObject.toString(), contentType, "utf-8"));
             method.addRequestHeader("Content-Type", contentType);
 
             int statusCode = client.executeMethod(method);

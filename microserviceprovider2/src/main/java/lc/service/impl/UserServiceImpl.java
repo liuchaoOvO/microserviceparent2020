@@ -4,8 +4,8 @@ package lc.service.impl;
  * @author liuchaoOvO on 2019/3/15
  */
 
-import lc.entity.SysUser;
 import lc.dao.UserDao;
+import lc.entity.SysUser;
 import lc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,8 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class UserServiceImpl implements UserService
-{
+public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserDao userDao;

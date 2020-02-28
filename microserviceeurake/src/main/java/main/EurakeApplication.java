@@ -12,8 +12,7 @@ import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 @Slf4j
 @SpringBootApplication
 @EnableEurekaServer
-public class EurakeApplication
-{
+public class EurakeApplication {
     public static void main(String[] args) {
         SpringApplication.run(EurakeApplication.class, args);
         log.info("eureka-server start success");

@@ -4,6 +4,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+
 /**
  * @author liuchaoOvO on 2019/5/22
  */
@@ -11,8 +12,7 @@ import lombok.ToString;
 @Getter
 @ToString
 @EqualsAndHashCode
-public class SecProductInfo
-{
+public class SecProductInfo {
     private String productId;
     private String stock;
 }

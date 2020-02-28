@@ -6,7 +6,7 @@ import com.google.gson.Gson;
 /**
  * @ClassName ResultUtil
  * @Description TODO
- * @Author simonsfan
+ * @Author liuchaoOvO
  * @Date 2019/1/1
  * Version  1.0
  */

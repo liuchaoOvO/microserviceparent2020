@@ -36,10 +36,9 @@ public class SecKillServiceImpl implements SecKillService {
         return productService.getGoodsVoByGoodsId(goodsId);
     }
 
-
     @Override
     @LcnTransaction //分布式事务注解
-    //保证这三个操作，减库存 下订单 写入秒杀订单是一个事物
+    //保证这三个操作，减库存 下订单 写入秒杀订单是一个事务
     public OrderInfo seckill(SysUser user, GoodsVo goodsVo) throws Exception {
         OrderInfo orderInfo = null;
         //减库存
@@ -58,7 +57,6 @@ public class SecKillServiceImpl implements SecKillService {
         sysUser.setUsername("test_seckill()");
         sysUser.setPassword("1");
         consumerService.add(sysUser);
-
         return orderInfo;
     }
 
