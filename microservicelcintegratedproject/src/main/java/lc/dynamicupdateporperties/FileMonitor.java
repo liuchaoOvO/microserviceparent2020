@@ -49,7 +49,7 @@ public class FileMonitor {
 
 
     public void registerFileListener(String path, FileListener fileListener) {
-        logger.info("register for path:{} FileListener:{}", path, fileListener.name());
+        logger.info("register for path:{},FileListener:{}", path, fileListener.name());
         fileListnerRegister.register(path, fileListener);
     }
 

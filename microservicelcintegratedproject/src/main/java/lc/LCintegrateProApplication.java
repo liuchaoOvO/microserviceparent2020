@@ -1,8 +1,11 @@
-package lc; /**
+package lc;
+
+/**
  * @author liuchaoOvO on 2019/3/15
  */
 
 import com.codingapi.txlcn.tc.config.EnableDistributedTransaction;
+import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,6 +13,7 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+@Slf4j
 @SpringBootApplication
 @MapperScan ("lc.dao")
 @EnableEurekaClient
@@ -23,5 +27,6 @@ public class LCintegrateProApplication {
         //在启动类中增加监听器监听自定义程序
         //springApplication.addListeners(new ApplicationStartup());
         springApplication.run(args);
+        log.info("LCintegrateProApplication start success");
     }
 }

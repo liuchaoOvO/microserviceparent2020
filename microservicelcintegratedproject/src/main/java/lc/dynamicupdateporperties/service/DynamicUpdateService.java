@@ -6,11 +6,11 @@ import lc.dynamicupdateporperties.FileMonitor;
 import lc.dynamicupdateporperties.utils.ResourceUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.util.Strings;
-import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -36,13 +36,13 @@ public class DynamicUpdateService implements BeanPostProcessor {
         log.debug("DynamicUpdateService.Constructions....");
     }
 
-    @Override
+   /* @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
         log.debug("DynamicUpdateService.postProcessAfterInitialization->to do minor method...");
         minor();
         return bean;
-    }
-
+    }*/
+    @PostConstruct
     public void minor() {
         log.debug("DynamicUpdateService.minor....");
         refresh();
