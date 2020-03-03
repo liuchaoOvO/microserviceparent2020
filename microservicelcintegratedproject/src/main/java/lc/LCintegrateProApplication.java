@@ -1,4 +1,6 @@
-package lc; /**
+package lc;
+
+/**
  * @author liuchaoOvO on 2019/3/15
  */
 
