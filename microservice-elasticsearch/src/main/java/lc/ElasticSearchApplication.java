@@ -12,6 +12,6 @@ public class ElasticSearchApplication {
     public static void main(String[] args) {
         SpringApplication springApplication = new SpringApplication(ElasticSearchApplication.class);
         springApplication.run(args);
-        log.info("lc.ElasticSearchApplication start success");
+        log.info("ElasticSearchApplication start success");
     }
 }
