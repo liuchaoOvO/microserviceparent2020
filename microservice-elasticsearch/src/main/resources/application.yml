@@ -1,0 +1,10 @@
+server:
+  port: 9123
+spring:
+  data:
+    elasticsearch:
+      cluster-name: LC-ElasticSearch-MASTER
+      cluster-nodes: 127.0.0.1:9300
+      repositories:
+        enabled: true
+
