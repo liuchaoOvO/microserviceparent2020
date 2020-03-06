@@ -10,10 +10,30 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>microservice-elasticsearch</artifactId>
+    <properties>
+        <java.version>1.8</java.version>
+        <spring-boot.version>2.1.5.RELEASE</spring-boot.version>
+        <spring-cloud.version>Greenwich.SR1</spring-cloud.version>
+    </properties>
+
     <!--注意:如果该pom使用了<parent>那么需要在此定义es版本号,因为spring-boot-start-parent中已经定义了es相关依赖的版本号
     ，high-level-client中的部分依赖会被覆盖成低版本的,导出出现莫名其妙的错误,所以在该依赖中指定dependencyManagement-->
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-parent</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
             <dependency>
                 <groupId>org.elasticsearch.client</groupId>
                 <artifactId>elasticsearch-rest-high-level-client</artifactId>
@@ -53,7 +73,6 @@
             <artifactId>elasticsearch-rest-high-level-client</artifactId>
             <version>7.6.0</version>
         </dependency>
-
 
         <dependency>
             <groupId>org.springframework.boot</groupId>

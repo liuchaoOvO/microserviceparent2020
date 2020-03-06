@@ -13,6 +13,8 @@ import org.elasticsearch.action.support.replication.ReplicationResponse;
 import org.elasticsearch.action.update.UpdateRequest;
 import org.elasticsearch.action.update.UpdateResponse;
 import org.elasticsearch.client.RequestOptions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,10 +27,10 @@ import java.util.Map;
  * @author liuchaoOvO on 2020/3/5
  * @Description TODO
  */
-@Slf4j
 @RestController
 @RequestMapping ("/search")
 public class ElasticSearchController {
+    private static final Logger log = LoggerFactory.getLogger(ElasticSearchController.class);
     @Autowired
     private HighLevelClient client;
 
@@ -99,7 +101,7 @@ public class ElasticSearchController {
         return "delete success";
     }
 
-    @PostMapping ("update")
+    @PutMapping ("update")
     @SneakyThrows
     public String update(@RequestParam String index, @RequestParam String type, @RequestParam String id, @RequestBody Map map) {
         UpdateRequest updateRequest = new UpdateRequest();
