@@ -1,7 +1,6 @@
 package lc.elasticsearch;
 
 import lombok.SneakyThrows;
-import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.action.DocWriteResponse;
 import org.elasticsearch.action.delete.DeleteRequest;
 import org.elasticsearch.action.delete.DeleteResponse;
@@ -28,7 +27,7 @@ import java.util.Map;
  * @Description TODO
  */
 @RestController
-@RequestMapping ("/search")
+@RequestMapping ("/essearch")
 public class ElasticSearchController {
     private static final Logger log = LoggerFactory.getLogger(ElasticSearchController.class);
     @Autowired
@@ -36,14 +35,14 @@ public class ElasticSearchController {
 
     @PostMapping ("/add")
     public String add() throws IOException {
-        IndexRequest indexRequest1 = new IndexRequest("posts",//索引名称
-                "doc",//类型名称
-                "3");//文档ID
+        IndexRequest indexRequest1 = new IndexRequest("post0306",//索引名称
+                "doc0306",//类型名称
+                "1");//文档ID
         //1、String Source
         String jsonString = "{" + "\"user\":\"kimchy\"," + "\"postDate\":\"2013-01-30\"," + "\"message\":\"trying out Elasticsearch\"" + "}";
         //2、Map Source
         Map<String, Object> jsonMap = new HashMap();
-        jsonMap.put("user", "lcc");
+        jsonMap.put("user", "lcc0306");
         jsonMap.put("postDate", new Date());
         jsonMap.put("messagelcclc", "Map lcc trying out elasticsearch");
 
@@ -73,9 +72,9 @@ public class ElasticSearchController {
         return " es document data add success...";
     }
 
-    @GetMapping ("get")
+    @GetMapping ("get/{index}/{type}/{id}")
     @SneakyThrows
-    public String get(@RequestParam String index, @RequestParam String type, @RequestParam String id) {
+    public String get(@PathVariable String index, @PathVariable String type, @PathVariable String id) {
         GetRequest getRequest = new GetRequest();
         getRequest.index(index);
         getRequest.type(type);
@@ -85,9 +84,9 @@ public class ElasticSearchController {
         return "get success,response result:" + response.getSourceAsString();
     }
 
-    @DeleteMapping ("delete")
+    @DeleteMapping ("delete/{index}/{type}/{id}")
     @SneakyThrows
-    public String delete(@RequestParam String index, @RequestParam String type, @RequestParam String id) {
+    public String delete(@PathVariable String index, @PathVariable String type, @PathVariable String id) {
         DeleteRequest deleteRequest = new DeleteRequest();
         deleteRequest.index(index);
         deleteRequest.type(type);
@@ -101,9 +100,9 @@ public class ElasticSearchController {
         return "delete success";
     }
 
-    @PutMapping ("update")
+    @PutMapping ("update/{index}/{type}/{id}")
     @SneakyThrows
-    public String update(@RequestParam String index, @RequestParam String type, @RequestParam String id, @RequestBody Map map) {
+    public String update(@PathVariable String index, @PathVariable String type, @PathVariable String id, @RequestBody Map map) {
         UpdateRequest updateRequest = new UpdateRequest();
         updateRequest.index(index);
         updateRequest.type(type);
