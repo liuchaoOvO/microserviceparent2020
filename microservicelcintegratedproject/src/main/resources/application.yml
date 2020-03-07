@@ -1,3 +1,6 @@
+lc:
+  log:
+    enable: true
 server:
   port: 12580
 
