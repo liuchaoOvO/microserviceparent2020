@@ -38,6 +38,7 @@
         <module>microservicelcintegratedproject</module>
         <module>microserviceconfigclient</module>
         <module>microservicetxlcnmanager</module>
+        <module>microservice-elasticsearch</module>
     </modules>
 
 
