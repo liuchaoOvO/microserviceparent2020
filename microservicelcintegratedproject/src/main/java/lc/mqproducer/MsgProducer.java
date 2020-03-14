@@ -9,6 +9,7 @@ import org.springframework.amqp.rabbit.support.CorrelationData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -42,6 +43,21 @@ public class MsgProducer implements RabbitTemplate.ConfirmCallback {
         }
     }
 
+    //直接 点对点 发消息到ProviderService 服务的远程监听+ 死信队列逻辑
+    public String mqSendPoint2PointToRomoteService(Map map) {
+        try {
+            logger.debug("mqSendPoint2PointToRomoteService begin...");
+            CorrelationData correlationId = new CorrelationData(UUID.randomUUID().toString());
+            rabbitTemplate.convertAndSend(RabbitConfig.TopicExchange_B, RabbitConfig.TopicExchange_DLROUTINGKEY,
+                    map, correlationId);
+            return correlationId.toString();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "mqSendPoint2PointToRomoteService fail---";
+        }
+    }
+
+    //话题
     public String sendTopicMsg(String content) {
         CorrelationData correlationId = new CorrelationData(UUID.randomUUID().toString());
         //把消息放入TopicExchange_ROUTINGKEYThird对应的队列当中去，对应的是队列D  因为topic.second.third 满足表达式topic.# 而不满足topic.*
@@ -49,6 +65,7 @@ public class MsgProducer implements RabbitTemplate.ConfirmCallback {
         return correlationId.toString();
     }
 
+    //话题
     public String mqSendTopicAll(Object object) {
         try {
             CorrelationData correlationId = new CorrelationData(UUID.randomUUID().toString());
@@ -95,9 +112,9 @@ public class MsgProducer implements RabbitTemplate.ConfirmCallback {
     public void confirm(CorrelationData correlationData, boolean ack, String cause) {
         logger.info(" 回调id:" + correlationData);
         if (ack) {
-            logger.info("消息成功消费");
+            logger.info("MQ回调 消息成功消费");
         } else {
-            logger.info("消息消费失败:" + cause);
+            logger.info("MQ回调 消息消费失败:" + cause);
         }
     }
 

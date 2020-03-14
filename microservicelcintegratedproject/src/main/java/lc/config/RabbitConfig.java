@@ -32,18 +32,24 @@ public class RabbitConfig {
     private String username;
     @Value ("${rabbitmq.password}")
     private String password;
+    /**
+     * 调用正常队列过期时间 单位为微秒.
+     */
+    @Value ("${tq.makecall.expire:60000}")
+    private long makeCallExpire;
 
     //交换机
     public static final String DirectExchange_A = "directExchange_A";
     public static final String TopicExchange_B = "topicExchange_B";
     public static final String FanoutExchange_C = "fanoutExchange_C";
+    public static final String TopicExchange_DeadLetter = "topicExchange_DeadLetter"; //死信交换机名称
 
     //路由键  用于把生产者的数据绑定到交换机上的
     public static final String DirectExchange_ROUTINGKEY = "DirectExchange_ROUTINGKEY";
     public static final String DirectExchange_SecKillROUTINGKEY = "DirectExchange_SecKillROUTINGKEY";
     public static final String TopicExchange_ROUTINGKEYSecond = "topic.second";
     public static final String TopicExchange_ROUTINGKEYThird = "topic.second.third";
-
+    public static final String TopicExchange_DLROUTINGKEY = "lind.queue";
     //绑定键  用于把交换机的消息绑定到队列
     public final static String TopicROUTINGKEYOne = "topic.*";  //表达式适合topic.开头的下一级
     public final static String TopicROUTINGKEYAll = "topic.#";  //表达式适合topic.开头的所有
@@ -51,11 +57,14 @@ public class RabbitConfig {
     //队列
     public static final String QUEUE_A = "QUEUE_A";
     public static final String QUEUE_B = "QUEUE_B";
+    public static final String QUEUE_ProviderService_A = "QUEUE_Provider_A";
     public static final String QUEUE_C = "topic.QUEUE_C";
     public static final String QUEUE_D = "topic.QUEUE_D";
     public static final String QUEUE_Fanout_A = "fanout.A";
     public static final String QUEUE_Fanout_B = "fanout.B";
     public static final String QUEUE_SecKillQueue = "QUEUE_SecKillQueue";
+
+    public static final String LIND_DEAD_QUEUE = "lind.queue.dead";
 
     @Bean
     public ConnectionFactory connectionFactory() {
@@ -95,6 +104,9 @@ public class RabbitConfig {
         return new TopicExchange(TopicExchange_B);
     }
 
+    /**
+     * 广播交换机.
+     */
     @Bean
     FanoutExchange fanoutExchange() {
         return new FanoutExchange(FanoutExchange_C);
@@ -146,6 +158,55 @@ public class RabbitConfig {
     public Queue queue_SecKillQueue() {
         return new Queue(QUEUE_SecKillQueue, true);
     }
+
+
+    /**
+     * 创建死信交换机.
+     */
+    @Bean
+    public TopicExchange lindExchangeDl() {
+        return (TopicExchange) ExchangeBuilder.topicExchange(TopicExchange_DeadLetter).durable(true)
+                .build();
+    }
+
+    /**
+     * 创建普通队列.
+     */
+    @Bean
+    public Queue lindQueue() {
+        return QueueBuilder.durable(QUEUE_ProviderService_A)
+                .withArgument("x-dead-letter-exchange", TopicExchange_DeadLetter)//设置死信交换机
+                .withArgument("x-message-ttl", makeCallExpire)
+                .withArgument("x-dead-letter-routing-key", LIND_DEAD_QUEUE)//设置死信routingKey
+                .build();
+    }
+
+    /**
+     * 创建死信队列.
+     */
+    @Bean
+    public Queue lindDelayQueue() {
+        return QueueBuilder.durable(LIND_DEAD_QUEUE).build();
+    }
+
+    /**
+     * 绑定死信队列.
+     */
+    @Bean
+    public Binding bindDeadBuilders() {
+        return BindingBuilder.bind(lindDelayQueue()).to(lindExchangeDl()).with(LIND_DEAD_QUEUE);
+    }
+
+    /**
+     * 绑定普通队列.
+     *
+     * @return
+     */
+    @Bean
+    public Binding bindBuilders() {
+        return BindingBuilder.bind(lindQueue()).to(topicExchange()).with(TopicExchange_DLROUTINGKEY);
+    }
+
 
     @Bean
     public Binding binding_QueueA_DirectExchange_ROUTINGKEY() {
