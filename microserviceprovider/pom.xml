@@ -12,11 +12,11 @@
     <artifactId>microservice-provider</artifactId>
 
     <dependencies>
-        <!-- <dependency>
-             <groupId>com.lc.springcloud</groupId>
-             <artifactId>microservice-common</artifactId>
-             <version>${project.version}</version>
-         </dependency>-->
+        <!-- RabbitMQ -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>

@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author liuchaoOvO on 2019/4/11
@@ -48,6 +50,27 @@ public class MQController {
         }
     }
 
+    //验证直接点对点 发消息到ProviderService服务的远程监听
+    @RequestMapping (value = "/mqSendPoint2PointToRomoteService", method = RequestMethod.POST)
+    @ResponseBody
+    public String mqSendPoint2PointToRomoteService() {
+        Map requestMap = new HashMap<>();
+        requestMap.put("ID", "testId");
+        requestMap.put("msg", "发送消息到ProviderService服务的远程监消息");
+        try {
+            String correlationId = msgProducer.mqSendPoint2PointToRomoteService(requestMap);
+            if (correlationId != "") {
+                logger.debug("发送到mq的请求成功,correlationId:{}", correlationId);
+                return "mqSendPoint2PointToRomoteService发送到mq的请求成功：" + correlationId;
+            } else {
+                logger.debug("mqSendPoint2PointToRomoteService 发送到mq的请求失败");
+                return "mqSendPoint2PointToRomoteService 发送到mq的请求失败...";
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("mqSendPoint2PointToRomoteService---RuntimeException");
+        }
+    }
+
     //验证广播模式
     @RequestMapping (value = "/mqSendFanoutObj", method = RequestMethod.POST)
     @ResponseBody
@@ -59,7 +82,6 @@ public class MQController {
         } else {
             logger.debug("发送到mq的请求失败");
             return "mqSendFanoutObj发送到mq的请求失败...";
-
         }
     }
 
