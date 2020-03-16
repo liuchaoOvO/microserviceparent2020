@@ -49,7 +49,6 @@ public class SecKillServiceImpl implements SecKillService {
             // 测试事务性： int v = 100/0;
         } else {
             setGoodsOver(goodsVo.getId());
-
         }
         // feign 调用远程  测试分布式服务的事务性
         SysUser sysUser = new SysUser();
@@ -68,10 +67,10 @@ public class SecKillServiceImpl implements SecKillService {
         } else {
             boolean isOver = getGoodsOver(goodsId);
             if (isOver) {
-                return -1;
-            } else {
-                return 0;
+                //减库存失败
+                return 2;
             }
+            return 1;
         }
     }
 

@@ -35,7 +35,8 @@
            <!-- <li><a th:text="${secKillStatus}">状态值</a></li>-->
             <span th:if="${status.code eq 0}">秒杀中</span>
             <span th:if="${status.code eq 1}">秒杀失败</span>
-            <span th:if="${status.code ne 0 and status.code ne 1 }">秒杀成功</span>
+            <span th:if="${status.code eq 2}">秒杀失败,由于减库存失败</span>
+            <span th:if="${status.code ne 0 and status.code ne 1 and status.code ne 2 }">秒杀成功</span>
         </ul>
     </div>
     <div>

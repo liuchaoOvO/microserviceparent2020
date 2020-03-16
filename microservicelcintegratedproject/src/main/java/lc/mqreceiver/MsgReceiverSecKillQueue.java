@@ -16,7 +16,6 @@ import org.springframework.stereotype.Component;
 
 /**
  * @author liuchaoOvO on 2018/12/28
- *
  */
 @Component
 @RabbitListener (queues = RabbitConfig.QUEUE_SecKillQueue, containerFactory = "rabbitListenerContainerFactory")
@@ -29,10 +28,10 @@ public class MsgReceiverSecKillQueue {
 
     @RabbitHandler
     public void processSecKill(@Payload SeckillMessage obj) {
+        logger.debug("processSecKill-receive message:{}", obj.toString());
+        lc.entity.SysUser user = obj.getUser();
+        long goodsId = obj.getGoodsId();
         try {
-            logger.debug("receive message:{}", obj.toString());
-            lc.entity.SysUser user = obj.getUser();
-            long goodsId = obj.getGoodsId();
             GoodsVo goodsVo = secKillService.getGoodsVoByGoodsId(goodsId);
             int stock = goodsVo.getStock_count();
             if (stock <= 0) {
@@ -48,10 +47,14 @@ public class MsgReceiverSecKillQueue {
                 OrderInfo orderInfo = secKillService.seckill(user, goodsVo);
                 logger.debug("orderInfo:{}", orderInfo.toString());
             } catch (Exception e) {
-                logger.debug(e.getMessage());
+                logger.error("减库存 下订单 写入秒杀订单过程存在错误:{}", e.getMessage());
+                // 往redis 写入一个空值 证明该数据错误，方便后面查询该秒杀结果时，给出秒杀失败的结果
+                redisUtil.set("seckill" + "" + user.getId() + "_" + goodsVo.getId(), null);
             }
         } catch (Exception e) {
-            logger.debug(e.getMessage());
+            logger.error(e.getMessage());
+            // 往redis 写入一个空值 证明该数据错误，方便后面查询该秒杀结果时，给出秒杀失败的结果
+            redisUtil.set("seckill" + "" + user.getId() + "_" + goodsId, null);
         }
     }
 
