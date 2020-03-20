@@ -50,6 +50,7 @@ public class RabbitConfig {
     public static final String TopicExchange_ROUTINGKEYSecond = "topic.second";
     public static final String TopicExchange_ROUTINGKEYThird = "topic.second.third";
     public static final String TopicExchange_DLROUTINGKEY = "lind.queue";
+
     //绑定键  用于把交换机的消息绑定到队列
     public final static String TopicROUTINGKEYOne = "topic.*";  //表达式适合topic.开头的下一级
     public final static String TopicROUTINGKEYAll = "topic.#";  //表达式适合topic.开头的所有
@@ -90,9 +91,9 @@ public class RabbitConfig {
      * 1. 设置交换机类型
      * 2. 将队列绑定到交换机
      * FanoutExchange: 将消息分发到所有的绑定队列，无routingkey的概念
-     * HeadersExchange ：通过添加属性key-value匹配
-     * DirectExchange:按照routingkey分发到指定队列
-     * TopicExchange:多关键字匹配
+     * HeadersExchange : 通过添加属性key-value匹配
+     * DirectExchange: 按照routingkey分发到指定队列
+     * TopicExchange: 多关键字匹配
      */
     @Bean
     public DirectExchange defaultExchange() {
@@ -165,8 +166,7 @@ public class RabbitConfig {
      */
     @Bean
     public TopicExchange lindExchangeDl() {
-        return (TopicExchange) ExchangeBuilder.topicExchange(TopicExchange_DeadLetter).durable(true)
-                .build();
+        return (TopicExchange) ExchangeBuilder.topicExchange(TopicExchange_DeadLetter).durable(true).build();
     }
 
     /**
