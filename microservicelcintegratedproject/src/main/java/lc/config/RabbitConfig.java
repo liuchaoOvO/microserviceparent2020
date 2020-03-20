@@ -24,13 +24,13 @@ import org.springframework.context.annotation.Scope;
 @Configuration
 public class RabbitConfig {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    @Value ("${rabbitmq.host}")
+    @Value ("${spring.rabbitmq.host}")
     private String host;
-    @Value ("${rabbitmq.port}")
+    @Value ("${spring.rabbitmq.port}")
     private int port;
-    @Value ("${rabbitmq.username}")
+    @Value ("${spring.rabbitmq.username}")
     private String username;
-    @Value ("${rabbitmq.password}")
+    @Value ("${spring.rabbitmq.password}")
     private String password;
     /**
      * 调用正常队列过期时间 单位为微秒.
@@ -73,7 +73,7 @@ public class RabbitConfig {
         connectionFactory.setUsername(username);
         connectionFactory.setPassword(password);
         connectionFactory.setVirtualHost("/");
-        connectionFactory.setPublisherConfirms(true);  //自动确认机制 false为手动确认
+        connectionFactory.setPublisherConfirms(true);  //自动确认机制:只确认是否正确到达 Exchange 中 false为手动确认
         return connectionFactory;
     }
 
@@ -249,6 +249,7 @@ public class RabbitConfig {
         SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
         factory.setConnectionFactory(connectionFactory);
         factory.setMessageConverter(jsonMessageConverter());
+        factory.setAcknowledgeMode(AcknowledgeMode.MANUAL);  // 手动确认模式
         return factory;
     }
 }
