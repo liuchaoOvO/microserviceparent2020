@@ -129,6 +129,7 @@ public class SimpleTransactionManager implements TransactionManager {
             try {
                 List<String> modChannelKeys = rpcClient.remoteKeys(transUnit.getModId());
                 if (modChannelKeys.isEmpty()) {
+                    log.error("SimpleTransactionManager#notifyTransaction modChannelKeys isEmpty---服务端notify通知客户端找不到对应的通道。@groupId:{}", dtxContext.getGroupId());
                     // record exception
                     throw new RpcException("offline mod.");
                 }
@@ -141,6 +142,7 @@ public class SimpleTransactionManager implements TransactionManager {
                 }
             } catch (RpcException e) {
                 // 提交/回滚通讯失败
+                log.error("tm notify tc->SimpleTransactionManager#notifyTransaction 提交/回滚通讯失败->@groupId:{}", dtxContext.getGroupId());
                 List<Object> params = Arrays.asList(notifyUnitParams, transUnit.getModId());
                 rpcExceptionHandler.handleNotifyUnitMessageException(params, e);
             } finally {

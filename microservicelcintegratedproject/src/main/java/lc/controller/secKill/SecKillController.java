@@ -119,8 +119,8 @@ public class SecKillController {
             model.addAttribute(status);
             return "index";
         }
-        long orderId = secKillService.getSeckillResult(sysUser.getId(), goodsId);
-        status.setCode(orderId);
+        long resultNum = secKillService.getSeckillResult(sysUser.getId(), goodsId);
+        status.setCode(resultNum);
         model.addAttribute(status);
         return "index";
     }

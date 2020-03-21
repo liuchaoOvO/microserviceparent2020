@@ -1,6 +1,11 @@
 lc:
   log:
     enable: true
+crux:
+  sqlaspect:
+    dbtype: mysql
+    enabled: true
+
 server:
   port: 12580
 
@@ -14,10 +19,12 @@ spring:
   application:
     name: microservice-lcintegratedproject                #微服务的名字
   ###################以下为druid增加的配置#####################
+  #######  driverClassName:com.mysql.jdbc.Driver
+  ####### url: jdbc:mysql://localhost:3306/springboot?characterEncoding=utf-8&useSSL=false
   datasource:
-    driverClassName: com.mysql.jdbc.Driver                      # mysql驱动包
+    driverClassName: com.p6spy.engine.spy.P6SpyDriver                     # mysql驱动包
     type: com.alibaba.druid.pool.DruidDataSource                # 当前数据源操作类型
-    url: jdbc:mysql://localhost:3306/springboot?characterEncoding=utf-8&useSSL=false
+    url: jdbc:p6spy:mysql://localhost:3306/springboot?characterEncoding=utf-8&useSSL=false
     username: test                                              # mysql 本地环境 用户：root 密码 Liu123456
     password: 1
     initialSize: 5
@@ -47,17 +54,29 @@ spring:
     host: 127.0.0.1
     port: 6379
     password:
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
+    publisher-confirms: true     #  消息发送到交换机确认机制，是否确认回调
+    publisher-returns: true      #  启动消息失败返回，比如路由不到队列时触发回调
+    listener:
+      simple:
+        acknowledge-mode: manual
 
 tx-lcn:
   client:
     manager-address: 127.0.0.1:8070
-
-rabbitmq:
-  host: 127.0.0.1
-  port: 5672
-  username: guest
-  password: guest
-  publisher-confirms: true                                         #  消息发送到交换机确认机制,是否确认回
+  logger:
+    enabled: true
+    dbtype: mysql
+    only-error: false
+    driver-class-name: com.mysql.jdbc.Driver
+    jdbc-url: jdbc:mysql://localhost:3306/springboot?characterEncoding=utf-8&useSSL=false
+    username: test
+    password: 1
+    maximum-pool-size: 3
 
 eureka:
   client:

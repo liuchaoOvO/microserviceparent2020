@@ -34,7 +34,6 @@ public class ProductServiceImpl implements ProductService {
     @Override
     @LcnTransaction (propagation = DTXPropagation.SUPPORTS)//分布式事务注解
     public boolean reduceStock(GoodsVo goodsVo) throws Exception {
-        int numAttempts = 0;
         int ret = 0;
         SeckillGoods sg = new SeckillGoods();
         sg.setGoodsId(goodsVo.getId());
