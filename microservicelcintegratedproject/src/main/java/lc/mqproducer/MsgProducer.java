@@ -4,6 +4,7 @@ import lc.config.RabbitConfig;
 import lc.entity.SeckillMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.rabbit.support.CorrelationData;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ import java.util.UUID;
  * @author liuchaoOvO on 2018/12/28
  */
 @Component
-public class MsgProducer implements RabbitTemplate.ConfirmCallback {
+public class MsgProducer implements RabbitTemplate.ConfirmCallback, RabbitTemplate.ReturnCallback {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //由于rabbitTemplate的scope属性设置为ConfigurableBeanFactory.SCOPE_PROTOTYPE，所以不能自动注入，需要构造方法注入的方式
     private RabbitTemplate rabbitTemplate;
@@ -28,15 +29,19 @@ public class MsgProducer implements RabbitTemplate.ConfirmCallback {
     public MsgProducer(RabbitTemplate rabbitTemplate) {
         this.rabbitTemplate = rabbitTemplate;
         rabbitTemplate.setConfirmCallback(this); //rabbitTemplate如果为单例的话，那回调就是最后设置的内容
+        rabbitTemplate.setReturnCallback(this);
     }
 
     //直接 点对点
     public String mqSendUserObj(Object object) {
         try {
-            CorrelationData correlationId = new CorrelationData(UUID.randomUUID().toString());
+            String msgId = UUID.randomUUID().toString();
+            CorrelationData correlationData = new CorrelationData(msgId);
             //把消息放入DirectExchange_ROUTINGKEY对应的队列当中去，对应的是队列A
-            rabbitTemplate.convertAndSend(RabbitConfig.DirectExchange_A, RabbitConfig.DirectExchange_ROUTINGKEY, object, correlationId);
-            return correlationId.toString();
+            rabbitTemplate.setMandatory(true);
+            rabbitTemplate.convertAndSend(RabbitConfig.DirectExchange_A, RabbitConfig.DirectExchange_ROUTINGKEY,
+                    object, correlationData);
+            return msgId;
         } catch (Exception e) {
             e.printStackTrace();
             return "";
@@ -105,19 +110,6 @@ public class MsgProducer implements RabbitTemplate.ConfirmCallback {
     }
 
 
-    /**
-     * 回调
-     */
-    @Override
-    public void confirm(CorrelationData correlationData, boolean ack, String cause) {
-        logger.info(" 回调id:" + correlationData);
-        if (ack) {
-            logger.info("MQ回调 消息成功消费");
-        } else {
-            logger.info("MQ回调 消息消费失败:" + cause);
-        }
-    }
-
     public String sendSecKillMsg(SeckillMessage message) {
         CorrelationData correlationId = new CorrelationData(UUID.randomUUID().toString());
         try {
@@ -127,5 +119,32 @@ public class MsgProducer implements RabbitTemplate.ConfirmCallback {
             e.printStackTrace();
             return "sendSecKill发送失败，" + correlationId.toString();
         }
+    }
+
+    /**
+     * 回调  只确认是否正确到达 Exchange 中
+     * 消息发送到 Broker 后触发回调，确认消息是否到达 Broker 服务器，也就是只确认是否正确到达 Exchange 中
+     * 消息的发送确认
+     */
+    @Override
+    public void confirm(CorrelationData correlationData, boolean ack, String cause) {
+        logger.info(" publish confirm 回调id:" + correlationData);
+        if (ack) {
+            logger.info("MQ回调 消息成功送达到交换机");
+        } else {
+            logger.info("MQ回调 消息送达到交换机失败:" + cause);
+        }
+    }
+
+    /**
+     * 通过实现 ReturnCallback 接口，启动消息失败返回，比如路由不到队列时触发回调
+     */
+    @Override
+    public void returnedMessage(Message message, int replyCode, String replyText, String exchange, String routingKey) {
+        System.out.println("消息主体 message : " + message);
+        System.out.println("消息主体 message : " + replyCode);
+        System.out.println("描述：" + replyText);
+        System.out.println("消息使用的交换器 exchange : " + exchange);
+        System.out.println("消息使用的路由键 routing : " + routingKey);
     }
 }

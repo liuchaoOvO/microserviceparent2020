@@ -55,6 +55,5 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public SeckillOrder getOrderByUserIdGoodsId(String userId, long goodsId) {
         return (SeckillOrder) redisUtil.get("seckill" + "" + userId + "_" + goodsId);
-
     }
 }

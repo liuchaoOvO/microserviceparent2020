@@ -30,9 +30,9 @@ public class MsgReceiverQueueB {
             logger.info("processObj()接收处理队列A当中的消息：" + obj.toString());
             boolean flag = service.addUser(obj);
             if (flag == true) {
-                logger.info("处理队列A的数据：" + obj.toString() + ",成功。");
+                logger.info("处理队列B的数据：" + obj.toString() + ",成功。");
             } else {
-                logger.info("处理队列A的数据：" + obj.toString() + ",失败。");
+                logger.info("处理队列B的数据：" + obj.toString() + ",失败。");
             }
         } catch (Exception e) {
             logger.debug(e.getMessage());

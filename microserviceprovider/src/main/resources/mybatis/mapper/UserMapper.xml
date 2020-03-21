@@ -3,15 +3,19 @@
 <mapper namespace="com.lc.dao.UserDao">
 
     <select id="getUser" resultType="SysUser" parameterType="String">
-        select id,password,username from SYS_user where ID=#{id}
+        select id,password,username
+        from SYS_user
+        where ID = #{id}
     </select>
 
     <select id="getUsers" resultType="SysUser">
-        select id,password,username from SYS_user
+        select id,password,username
+        from SYS_user
     </select>
 
     <insert id="addUser" parameterType="SysUser">
-        insert into SYS_user(id,username,password,status,last_ver) values(#{id}, #{username}, #{password},#{status},#{last_ver})
+        insert into sys_user(id, username, password, status, last_ver)
+        values (#{id}, #{username}, #{password}, #{status}, #{last_ver})
     </insert>
 
 </mapper>
