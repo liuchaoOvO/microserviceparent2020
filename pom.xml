@@ -34,7 +34,6 @@
         <module>microserviceconsumerhystrixdashbord</module>
         <module>microservicezuul</module>
         <module>microserviceconfigserver</module>
-        <module>providerdynamicupdateporperties</module>
         <module>microservicelcintegratedproject</module>
         <module>microserviceconfigclient</module>
         <module>microservicetxlcnmanager</module>
