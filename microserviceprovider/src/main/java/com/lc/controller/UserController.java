@@ -20,6 +20,7 @@ public class UserController {
     @RequestMapping (value = "/add", method = RequestMethod.POST)
     public boolean addUser(@RequestBody SysUser user) {
         boolean flag = service.addUser(user);
+        System.out.println("addUser flag:"+flag);
         return flag;
     }
 
