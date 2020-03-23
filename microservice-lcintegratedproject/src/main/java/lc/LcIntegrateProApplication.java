@@ -12,9 +12,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.ComponentScans;
-import org.springframework.context.annotation.FilterType;
 import org.springframework.core.env.Environment;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
@@ -26,9 +23,9 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 //@EnableCircuitBreaker
 @EnableSwagger2
 @EnableDistributedTransaction // 开启分布式事务
-public class LCintegrateProApplication {
+public class LcIntegrateProApplication {
     public static void main(String[] args) {
-        SpringApplication springApplication = new SpringApplication(LCintegrateProApplication.class);
+        SpringApplication springApplication = new SpringApplication(LcIntegrateProApplication.class);
         //在启动类中增加监听器监听自定义程序
         //springApplication.addListeners(new ApplicationStartup());
         springApplication.run(args);
