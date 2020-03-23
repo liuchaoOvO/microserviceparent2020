@@ -24,19 +24,19 @@
     </properties>
 
     <modules>
-        <module>microserviceeurake</module>
-        <module>microserviceprovider</module>
-        <module>microserviceconsumer</module>
-        <module>microserviceprovider2</module>
-        <module>microserviceprovider3</module>
-        <module>microserviceproviderhystrix</module>
-        <module>microserviceconsumerfeignhystrix</module>
-        <module>microserviceconsumerhystrixdashbord</module>
-        <module>microservicezuul</module>
-        <module>microserviceconfigserver</module>
-        <module>microservicelcintegratedproject</module>
-        <module>microserviceconfigclient</module>
-        <module>microservicetxlcnmanager</module>
+        <module>microservice-eurake</module>
+        <module>microservice-provider</module>
+        <module>microservice-consumer</module>
+        <module>microservice-provider2</module>
+        <module>microservice-provider3</module>
+        <module>microservice-provider-hystrix</module>
+        <module>microservice-consumer-feign-hystrix</module>
+        <module>microservice-consumer-hystrix-dashbord</module>
+        <module>microservice-zuul</module>
+        <module>microservice-config-server</module>
+        <module>microservice-lcintegratedproject</module>
+        <module>microservice-config-client</module>
+        <module>microservice-tx-lcn-manager</module>
         <module>microservice-elasticsearch</module>
     </modules>
 

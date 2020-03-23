@@ -1,4 +1,4 @@
-package com.lc.service.impl;
+package lc.service.impl;
 
 /**
  * @author liuchaoOvO on 2019/3/15
@@ -6,9 +6,9 @@ package com.lc.service.impl;
 
 import com.codingapi.txlcn.tc.annotation.DTXPropagation;
 import com.codingapi.txlcn.tc.annotation.LcnTransaction;
-import com.lc.dao.UserDao;
-import com.lc.entity.SysUser;
-import com.lc.service.UserService;
+import lc.dao.UserDao;
+import lc.entity.SysUser;
+import lc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,11 +1,11 @@
-package com.lc.controller;
+package lc.controller;
 
 /**
  * @author liuchaoOvO on 2019/3/15
  */
 
-import com.lc.entity.SysUser;
-import com.lc.service.UserService;
+import lc.entity.SysUser;
+import lc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

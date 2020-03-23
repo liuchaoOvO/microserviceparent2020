@@ -29,7 +29,7 @@ mybatis:
   config-location: "classpath:mybatis/mybatis.cfg.xml"        # mybatis配置文件所在路径
   mapper-locations:
     - "classpath:mybatis/mapper/**/*.xml"                     # mapper映射文件
-  type-aliases-package: com.lc.entity            # 别名类所在包
+  type-aliases-package: lc.entity            # 别名类所在包
 
 rabbitmq:
   host: 127.0.0.1
@@ -63,7 +63,7 @@ eureka:
     instance-id: microservicecloud-provider7001     #自定义服务名称信息
     prefer-ip-address: true                        #访问路径可以显示IP地址
 info:
-  app.name: microservicecloud-provider1
+  app.name: microservicecloud-provider
   company.name: www.lc.com
   build.artifactId: ${project.artifactId}
   build.version: ${project.version}

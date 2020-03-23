@@ -1,17 +1,14 @@
-package com.lc.dao;
+package lc.service;
 
 /**
  * @author liuchaoOvO on 2019/3/15
  */
 
-import com.lc.entity.SysUser;
-import org.apache.ibatis.annotations.Mapper;
+import lc.entity.SysUser;
 
 import java.util.List;
 
-
-@Mapper
-public interface UserDao {
+public interface UserService {
 
     public boolean addUser(SysUser user);
 

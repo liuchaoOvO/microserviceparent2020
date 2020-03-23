@@ -1,4 +1,4 @@
-package com.lc.mq;
+package lc.mq;
 
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
