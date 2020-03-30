@@ -15,6 +15,8 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.core.env.Environment;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+import javax.annotation.PostConstruct;
+
 @Slf4j
 @SpringBootApplication
 @MapperScan ("lc.dao")

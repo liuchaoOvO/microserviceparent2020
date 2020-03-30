@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<SysUser> getUsers() {
-        return null;
+        return userDao.getUsers();
     }
 
 

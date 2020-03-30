@@ -1,17 +1,17 @@
 package lc.controller.secKill;
 
+import com.google.common.hash.BloomFilter;
 import com.google.common.util.concurrent.RateLimiter;
 import lc.entity.GoodsVo;
 import lc.entity.SeckillMessage;
 import lc.entity.Status;
 import lc.entity.SysUser;
+import lc.init.InitLogic;
 import lc.mqproducer.MsgProducer;
 import lc.service.secKill.ProductService;
 import lc.service.secKill.SecKillService;
 import lc.util.CustomParamBinding;
 import lc.util.RedisUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,7 +31,6 @@ import java.util.concurrent.TimeUnit;
 @Controller
 @RequestMapping (value = "/secKill")
 public class SecKillController {
-    private static final Logger logger = LoggerFactory.getLogger(SecKillController.class);
 
     @Autowired
     private RedisUtil redisUtil;
@@ -45,6 +44,8 @@ public class SecKillController {
     RateLimiter rateLimiter = RateLimiter.create(10);
     //做标记，判断该商品是否被处理过了
     private HashMap<Long, Boolean> localOverMap = new HashMap<Long, Boolean>();
+    //基于bloomFilter的防止缓存击穿策略
+    BloomFilter bloomFilter = InitLogic.bloomFilter;
 
     @PostMapping ("/doseckill")
     public String doseckill(Model model, @CustomParamBinding SysUser sysUser, @RequestParam (value = "goodsId", defaultValue = "1") long goodsId) {
@@ -54,6 +55,9 @@ public class SecKillController {
         }
         if (sysUser == null) {
             return "500210, Session不存在或者已经失效";
+        }
+        if (!bloomFilter.mightContain(sysUser.getId())) {
+            return "500301, 用户在bloomFilter中不存在";
         }
         //内存标记，减少redis访问
         boolean over = false;
