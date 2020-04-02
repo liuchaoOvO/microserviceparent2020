@@ -4,6 +4,7 @@ import com.google.common.hash.BloomFilter;
 import com.google.common.hash.Funnels;
 import lc.entity.SysUser;
 import lc.service.user.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -16,6 +17,7 @@ import java.util.Optional;
  * @author liuchaoOvO on 2020/3/30
  * @Description TODO
  */
+@Slf4j
 @Component
 public class InitLogic implements InitializingBean {
     @Autowired
@@ -27,6 +29,7 @@ public class InitLogic implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
+        log.debug("InitLogic#afterPropertiesSet--往bloomFilter中存入用户信息--");
         //1、查用户
         List<SysUser> userList = userService.getUsers();
         //2、放入bloomFilter
