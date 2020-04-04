@@ -44,7 +44,7 @@ public class OpLogAspectBO {
             Class<?> targetClass = Class.forName(targetName);
             Method[] methods = targetClass.getMethods();
             for (Method method : methods) {
-                if (method.getName().equals(methodName)) {
+                if (method.getName().equals(methodName)&&method.getAnnotation(OpLog.class)!=null) {
                     logger.info("==beforeMethod   begin===");
                     logger.info("System:==" + method.getAnnotation(OpLog.class).system());
                     logger.info("Module:==" + method.getAnnotation(OpLog.class).module());
@@ -108,7 +108,7 @@ public class OpLogAspectBO {
         Class<?> targetClass = Class.forName(targetName);
         Method[] methods = targetClass.getMethods();
         for (Method method : methods) {
-            if (method.getName().equals(methodName)) {
+            if (method.getName().equals(methodName)&&method.getAnnotation(OpLog.class)!=null) {
                 logDto.setSystem(method.getAnnotation(OpLog.class).system());
                 logDto.setModule(method.getAnnotation(OpLog.class).module());
                 logDto.setMenu(method.getAnnotation(OpLog.class).menu());
