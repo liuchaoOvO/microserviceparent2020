@@ -13,6 +13,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.core.env.Environment;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import javax.annotation.PostConstruct;
@@ -25,6 +26,7 @@ import javax.annotation.PostConstruct;
 //@EnableCircuitBreaker
 @EnableSwagger2
 @EnableDistributedTransaction // 开启分布式事务
+@EnableAuthorizationServer
 public class LcIntegrateProApplication {
     public static void main(String[] args) {
         SpringApplication springApplication = new SpringApplication(LcIntegrateProApplication.class);
