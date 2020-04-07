@@ -53,10 +53,10 @@ public class OauthServerConfig extends AuthorizationServerConfigurerAdapter {
     }
 
     //授权信息保存策略
-  /*  @Bean
+    @Bean
     public ApprovalStore approvalStore() {
         return new JdbcApprovalStore(dataSource);
-    }*/
+    }
 
     //授权码模式专用对象
     @Bean
@@ -101,9 +101,12 @@ public class OauthServerConfig extends AuthorizationServerConfigurerAdapter {
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         endpoints
-                //.approvalStore(approvalStore())
+                // 授权允许存储方式
+                .approvalStore(approvalStore())
                 .authenticationManager(authenticationManager)
+                // 授权码模式code存储方式
                 .authorizationCodeServices(authorizationCodeServices())
+                // token存储方式
                 .tokenStore(tokenStore())
                 .userDetailsService(userDetailsService);
     }
