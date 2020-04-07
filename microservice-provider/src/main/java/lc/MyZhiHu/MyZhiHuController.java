@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
@@ -33,6 +34,7 @@ public class MyZhiHuController {
     }
 
     @GetMapping (value = "/acceptAuthorizationCode")
+    @ResponseBody
     public String acceptAuthorizationCode(@RequestParam String code) {
         logger.debug("myzhihu=====acceptAuthorizationCode");
         String getAccessTokenByCodeUrl = "http://microservice-lcintegratedproject/oauth/token?grant_type=authorization_code&code=" + code + "&client_id=sa" +
@@ -48,7 +50,7 @@ public class MyZhiHuController {
         String findSomeResourceWithTokenUrl = "http://microservice-lcintegratedproject/api/ping" + accessSuffix;
         String someResourceStr = restTemplate.getForObject(findSomeResourceWithTokenUrl, String.class);
         logger.debug("---someResourceStr:{}", someResourceStr);
-        return "/myzhihu/index";
+        return "从microservice-lcintegratedproject 服务获取的 授权保密数据结果:" + someResourceStr;
     }
 
 }
