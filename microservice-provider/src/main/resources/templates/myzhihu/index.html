@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>My知乎首页</title>
+    <!-- jquery -->
+</head>
+<body>
+<h1>hello microservicecloud-provider</h1>
+<h2>===========ProviderApplication My知乎 index 主页============</h2>
+
+<div>
+    请求用户授权登录 自定义登录: <a th:href="@{http://localhost:12580/oauth/authorize?response_type=code&client_id=sa&client_secret=1&redirect_uri=http://localhost:7001/myzhihu/api/acceptAuthorizationCode}">请求资源所有者自定义登录</a><br/>
+</div>
+</body>
+</html>

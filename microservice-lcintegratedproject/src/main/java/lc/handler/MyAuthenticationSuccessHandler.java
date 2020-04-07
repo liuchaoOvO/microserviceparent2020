@@ -41,9 +41,6 @@ public class MyAuthenticationSuccessHandler
             addCookie(response, token, (SysUser) map.get("user"));
         }
 
-      /*  String Url="http://www.baidu.com";
-        String reIndex="/index";
-       response.sendRedirect(reIndex);*/
         super.onAuthenticationSuccess(request, response, authentication);
     }
 

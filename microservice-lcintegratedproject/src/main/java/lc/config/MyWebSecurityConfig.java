@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -29,6 +30,7 @@ import javax.sql.DataSource;
  */
 @Configuration
 @EnableWebSecurity       // 启用 SpringSecurity Web 功能注解
+@EnableGlobalMethodSecurity (securedEnabled = true)
 public class MyWebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final static Logger logger = LoggerFactory.getLogger(MyWebSecurityConfig.class);
     /**
@@ -72,6 +74,7 @@ public class MyWebSecurityConfig extends WebSecurityConfigurerAdapter {
         return jdbcTokenRepository;
     }
 
+    //AuthenticationManager对象在OAuth2认证服务中要使用，提取放入IOC容器中
     @Bean (name = BeanIds.AUTHENTICATION_MANAGER)
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
@@ -83,11 +86,11 @@ public class MyWebSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()//配置安全策略
-                .antMatchers("/index", "/user/login", "/user/regist", "/qrcode/generateqrcode", "/kaptcha", "/mq/mqSendTopMsg", "/secKill/doseckill", "/testquarzt").permitAll()
+        http.authorizeRequests()
+                .antMatchers("/", "/user/login", "/user/regist", "/qrcode/generateqrcode", "/kaptcha", "/mq/mqSendTopMsg", "/secKill/doseckill", "/testquarzt").permitAll()
                 .antMatchers("/css/**", "/js/**", "/images/**").permitAll()
                 .antMatchers("/user/admin/**").hasRole("ADMIN") //以 "/admin/" 开头的URL只能由拥有 "ROLE_ADMIN"角色的用户访问。请注意我们使用 hasRole 方法，没有使用 "ROLE_" 前缀.
-                .anyRequest().authenticated()                                 //其余的所有请求都需要验证
+                .anyRequest().authenticated()
                 .and()                                                        //使用and()方法相当于XML标签的关闭
                 //先走验证码过滤器 再走用户密码验证拦截器
                 .addFilterBefore(validateCodeFilter, UsernamePasswordAuthenticationFilter.class);
