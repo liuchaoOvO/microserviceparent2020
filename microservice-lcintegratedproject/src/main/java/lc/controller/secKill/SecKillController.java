@@ -60,8 +60,7 @@ public class SecKillController {
             return "500301, 用户在bloomFilter中不存在";
         }
         //内存标记，减少redis访问
-        boolean over = false;
-        if (over) {
+        if (localOverMap.get(goodsId) != null && localOverMap.get(goodsId)) {
             return "500500, 商品已经秒杀完毕";
         }
         //预减库存

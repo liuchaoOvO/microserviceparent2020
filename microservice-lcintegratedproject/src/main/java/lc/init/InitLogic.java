@@ -15,7 +15,7 @@ import java.util.Optional;
 
 /**
  * @author liuchaoOvO on 2020/3/30
- * @Description TODO
+ * @Description 启动服务时 把用户数据放到bloomFilter中 秒杀操作时需要该数据 防止缓存击穿
  */
 @Slf4j
 @Component

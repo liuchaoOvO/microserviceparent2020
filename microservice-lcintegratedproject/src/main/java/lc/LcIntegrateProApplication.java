@@ -14,9 +14,8 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.core.env.Environment;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
-
-import javax.annotation.PostConstruct;
 
 @Slf4j
 @SpringBootApplication
@@ -27,6 +26,7 @@ import javax.annotation.PostConstruct;
 @EnableSwagger2
 @EnableDistributedTransaction // 开启分布式事务
 @EnableAuthorizationServer
+@EnableResourceServer
 public class LcIntegrateProApplication {
     public static void main(String[] args) {
         SpringApplication springApplication = new SpringApplication(LcIntegrateProApplication.class);
@@ -39,7 +39,7 @@ public class LcIntegrateProApplication {
         } else {
             log.info("LCintegrateProApplication started success no lc.log.enable customizer config");
         }
-        String enableLCNASPE=ApplicationContextHolder.getBean(Environment.class).getProperty("crux.sqlaspect.enabled");
+        String enableLCNASPE = ApplicationContextHolder.getBean(Environment.class).getProperty("crux.sqlaspect.enabled");
 
     }
 }
