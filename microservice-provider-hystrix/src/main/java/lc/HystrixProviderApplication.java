@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @MapperScan("lc.dao")
 @EnableEurekaClient
 @EnableDistributedTransaction  //开启分布式事务
-//@EnableCircuitBreaker          //开启断路器功能，进行容错管理
+@EnableCircuitBreaker          //开启断路器功能，进行容错管理
 public class HystrixProviderApplication
 {
 

@@ -8,6 +8,8 @@ import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import lc.entity.SysUser;
 import lc.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -18,6 +20,7 @@ import java.util.List;
 
 @RestController
 public class UserController {
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private UserService service;
@@ -40,7 +43,7 @@ public class UserController {
     * 测试后备模式(fallback)
     * 一旦服务调用失败，就调用hystrixGetUser方法
     */
-    @HystrixCommand(fallbackMethod="hystrixGetUser",
+    @HystrixCommand(fallbackMethod="hystrixGetUser",//指定服务降级处理方法；
             threadPoolKey = "circuitBreakerPool",
             commandProperties = {
                     @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "1000"),
@@ -59,6 +62,7 @@ public class UserController {
     public SysUser getUser(@PathVariable("id") String id){
         SysUser user = service.getUser(id);
         if(user == null){
+            logger.error("microservicecloud-provider  server ->getUser method throw RuntimeException:不存在id=" + id);
             throw new RuntimeException("不存在id=" + id + "对应的用户信息");
         }
         System.out.println("microservice-provider微服务在响应客户端请求……");
@@ -74,6 +78,7 @@ public class UserController {
 
     // 服务调用失败 请求结果找不到时，执行--->1、服务熔断
     public SysUser hystrixGetUser(@PathVariable("id") String id){
+        logger.info("microservicecloud-provider  server ->hystrixGetUser method come in id=" + id);
         SysUser user = new SysUser(id, "hystrixGetUser==不存在该用户", "0");
         return user;
     }
