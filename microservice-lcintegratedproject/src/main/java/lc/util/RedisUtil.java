@@ -72,12 +72,9 @@ public class RedisUtil {
         boolean result = false;
         try {
             ValueOperations<Serializable, Object> operations = redisTemplate.opsForValue();
-            try {
-                operations.set(key, value, expireTime, TimeUnit.SECONDS);
-                result = true;
-            } catch (Exception e) {
-                result = false;
-            }
+            operations.set(key, value);
+            Boolean expire = redisTemplate.expire(key, expireTime, TimeUnit.SECONDS);
+            result = expire;
         } catch (Exception e) {
             result = false;
             e.printStackTrace();
