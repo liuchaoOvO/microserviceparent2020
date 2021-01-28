@@ -124,7 +124,7 @@ public class MsgProducer implements RabbitTemplate.ConfirmCallback, RabbitTempla
     /**
      * 回调  只确认是否正确到达 Exchange 中
      * 消息发送到 Broker 后触发回调，确认消息是否到达 Broker 服务器，也就是只确认是否正确到达 Exchange 中
-     * 消息的发送确认
+     * 消息的发送确认[只确认是否正确到达 Exchange 中,不能确认是否能到底消息队列queue中]
      */
     @Override
     public void confirm(CorrelationData correlationData, boolean ack, String cause) {
